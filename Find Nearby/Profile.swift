@@ -14,6 +14,7 @@ struct Profile {
     var avatar: Image {
         Image(imageName)
     }
+    var email: String
 }
 
-var testProfiles = [Profile(name: "Yuhan Zhang", imageName: "Avatar"), Profile(name: "Test", imageName: "Test")]
+var testProfiles = [Profile(name: "Yuhan Zhang", imageName: "Avatar", email: "yuhan.zhang7@outlook.com"), Profile(name: "Test", imageName: "Test", email: "test@apple.com")]

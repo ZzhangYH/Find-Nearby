@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ProfileView: View {
     var profile: Profile
-    var isOn: Bool
     
     var body: some View {
         VStack {
@@ -29,6 +28,34 @@ struct ProfileView: View {
                 .font(.title)
                 .padding(10)
             
+            ZStack {
+                Rectangle()
+                    .fill(Color(UIColor.systemGray6))
+                    .frame(width: 365, height: 60)
+                .cornerRadius(10)
+                
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("Email address")
+                        Text(profile.email)
+                            .bold()
+                    }
+                    .font(.subheadline)
+                    .padding(.horizontal, 30)
+                    
+                    Spacer()
+                }
+            }
+            
+            ZStack {
+                Rectangle()
+                    .fill(Color(UIColor.systemGray6))
+                    .frame(width: 365, height: 60)
+                .cornerRadius(10)
+                
+                
+            }
+            
             Spacer()
         }
     }
@@ -36,6 +63,6 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(profile: testProfiles[0], isOn: true)
+        ProfileView(profile: testProfiles[1])
     }
 }
