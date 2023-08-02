@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B33B14B22A7A4749001AF21C /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33B14B12A7A4749001AF21C /* DiscoverView.swift */; };
 		B39C70332A78E01600F4FCF7 /* Find_NearbyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39C70322A78E01600F4FCF7 /* Find_NearbyApp.swift */; };
 		B39C70352A78E01600F4FCF7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39C70342A78E01600F4FCF7 /* ContentView.swift */; };
 		B39C70372A78E01700F4FCF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B39C70362A78E01700F4FCF7 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B33B14B12A7A4749001AF21C /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
 		B39C702F2A78E01600F4FCF7 /* Find Nearby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Find Nearby.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B39C70322A78E01600F4FCF7 /* Find_NearbyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Find_NearbyApp.swift; sourceTree = "<group>"; };
 		B39C70342A78E01600F4FCF7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				B39C70322A78E01600F4FCF7 /* Find_NearbyApp.swift */,
 				B39C70342A78E01600F4FCF7 /* ContentView.swift */,
 				B39C70422A78E2CD00F4FCF7 /* Profile.swift */,
+				B33B14B12A7A4749001AF21C /* DiscoverView.swift */,
 				B39C70442A78E58500F4FCF7 /* ProfileGrid.swift */,
 				B39C70482A78F0E900F4FCF7 /* ProfileView.swift */,
 				B39C70362A78E01700F4FCF7 /* Assets.xcassets */,
@@ -151,6 +154,7 @@
 				B39C70492A78F0E900F4FCF7 /* ProfileView.swift in Sources */,
 				B39C70332A78E01600F4FCF7 /* Find_NearbyApp.swift in Sources */,
 				B39C70452A78E58500F4FCF7 /* ProfileGrid.swift in Sources */,
+				B33B14B22A7A4749001AF21C /* DiscoverView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

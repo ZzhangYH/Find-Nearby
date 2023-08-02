@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     var profile: Profile
-    
+
     var body: some View {
         VStack {
             Rectangle()
@@ -32,7 +32,7 @@ struct ProfileView: View {
                 Rectangle()
                     .fill(Color(UIColor.systemGray6))
                     .frame(width: 365, height: 60)
-                .cornerRadius(10)
+                    .cornerRadius(10)
                 
                 HStack {
                     VStack(alignment: .leading) {
@@ -51,7 +51,7 @@ struct ProfileView: View {
                 Rectangle()
                     .fill(Color(UIColor.systemGray6))
                     .frame(width: 365, height: 60)
-                .cornerRadius(10)
+                    .cornerRadius(10)
                 
                 
             }
@@ -63,6 +63,6 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(profile: testProfiles[1])
+        ProfileView(profile: testProfiles[0])
     }
 }

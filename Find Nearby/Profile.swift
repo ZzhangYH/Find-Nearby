@@ -17,4 +17,10 @@ struct Profile {
     var email: String
 }
 
-var testProfiles = [Profile(name: "Yuhan Zhang", imageName: "Avatar", email: "yuhan.zhang7@outlook.com"), Profile(name: "Test", imageName: "Test", email: "test@apple.com")]
+var testProfiles = [
+    Profile(name: "Yuhan Zhang", imageName: "Avatar", email: "yuhan.zhang7@outlook.com"),
+    Profile(name: "John Appleseed", imageName: "Test", email: "test@apple.com"),
+    Profile(name: "Vivian Chou", imageName: "Test", email: "test@apple.com"),
+    Profile(name: "Rich Dinh", imageName: "Test", email: "test@apple.com"),
+    Profile(name: "Guillermo", imageName: "Test", email: "test@apple.com"),
+]
