@@ -9,54 +9,67 @@ import SwiftUI
 
 struct ProfileView: View {
     var profile: Profile
+    @State private var testToggle: Bool = false
 
     var body: some View {
-        VStack {
-            Rectangle()
-                .fill(Color(UIColor.systemGray4))
-                .ignoresSafeArea(edges: .top)
-                .frame(height: 265)
-            
-            profile.avatar
-                .resizable()
-                .frame(width: 175, height: 175)
-                .clipShape(Circle())
-                .offset(y: -130)
-                .padding(.bottom, -130)
-            
-            Text(profile.name)
-                .font(.title)
-                .padding(10)
-            
-            ZStack {
+        GeometryReader { geometry in
+            VStack(alignment: .center) {
                 Rectangle()
-                    .fill(Color(UIColor.systemGray6))
-                    .frame(width: 365, height: 60)
-                    .cornerRadius(10)
-                
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text("Email address")
-                        Text(profile.email)
-                            .bold()
+                    .fill(Color(UIColor.systemGray4))
+                    .ignoresSafeArea(edges: .top)
+                    .frame(height: geometry.size.height * 0.3)
+
+                profile.avatar
+                    .resizable()
+                    .frame(width: geometry.size.width * 0.45, height: geometry.size.width * 0.45)
+                    .clipShape(Circle())
+                    .offset(y: -geometry.size.width * 0.3)
+                    .padding(.bottom, -geometry.size.width * 0.3)
+
+                Text(profile.name)
+                    .bold()
+                    .font(.title)
+                    .padding(10)
+
+                ZStack {
+                    Rectangle()
+                        .fill(Color(UIColor.systemGray6))
+                        .frame(width: geometry.size.width * 0.9, height: geometry.size.height * 0.08)
+                        .cornerRadius(10)
+
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("Email address")
+                                .font(.caption)
+                            Text(profile.email)
+                                .bold()
+                                .foregroundColor(Color(UIColor.systemBlue))
+                        }
+                        .font(.subheadline)
+
+                        Spacer()
                     }
-                    .font(.subheadline)
-                    .padding(.horizontal, 30)
-                    
-                    Spacer()
+                    .padding()
+                    .frame(width: geometry.size.width * 0.9)
                 }
+
+                ZStack {
+                    Rectangle()
+                        .fill(Color(UIColor.systemGray6))
+                        .frame(width: geometry.size.width * 0.9, height: geometry.size.height * 0.08)
+                        .cornerRadius(10)
+
+                    Toggle(isOn: $testToggle) {
+                        Text("Allow others to find you?")
+                            .bold()
+                            .font(.subheadline)
+                    }
+                    .padding()
+                    .frame(width: geometry.size.width * 0.9)
+                }
+
+                Spacer()
             }
-            
-            ZStack {
-                Rectangle()
-                    .fill(Color(UIColor.systemGray6))
-                    .frame(width: 365, height: 60)
-                    .cornerRadius(10)
-                
-                
-            }
-            
-            Spacer()
         }
     }
 }

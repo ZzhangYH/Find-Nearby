@@ -9,18 +9,30 @@ import SwiftUI
 
 struct DiscoverView: View {
     var body: some View {
-        ScrollView {
-            let numOfHS = Int(ceil(Double(testProfiles.count) / 2))
-            
-            ForEach(0...numOfHS, id: \.self) { num in
-                let index = num * 2
-                HStack {
-                    if index < testProfiles.count {
-                        ProfileGrid(profile: testProfiles[index])
+        GeometryReader { geometry in
+            ScrollView {
+                let numOfHS = Int(ceil(Double(testProfiles.count) / 2))
+
+                ForEach(0...numOfHS, id: \.self) { num in
+                    let index = num * 2
+
+                    HStack {
+                        Spacer()
+
+                        if index < testProfiles.count {
+                            ProfileGrid(profile: testProfiles[index])
+                                .scaleEffect(geometry.size.width / 393)
+                                .padding(.horizontal, geometry.size.width * 0.01)
+                        }
+                        if index + 1 < testProfiles.count {
+                            ProfileGrid(profile: testProfiles[index + 1])
+                                .scaleEffect(geometry.size.width / 393)
+                                .padding(.horizontal, geometry.size.width * 0.01)
+                        }
+
+                        Spacer()
                     }
-                    if index + 1 < testProfiles.count {
-                        ProfileGrid(profile: testProfiles[index + 1])
-                    }
+                    .padding(.vertical, geometry.size.height * 0.01)
                 }
             }
         }

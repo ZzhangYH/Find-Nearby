@@ -24,10 +24,10 @@ struct ProfileGrid: View {
                     .clipShape(Circle())
                 
                 Text(profile.name)
-                    .frame(width: 105)
                     .multilineTextAlignment(.center)
                     .lineLimit(2)
-                    .padding()
+                    .frame(width: 105, height: 45)
+                    .offset(y: 5)
             }
         }
     }
