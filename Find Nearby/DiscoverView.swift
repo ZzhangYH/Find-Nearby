@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct DiscoverView: View {
+    @StateObject var mc = MCConnection()
+    
     var body: some View {
         GeometryReader { geometry in
             ScrollView {
@@ -33,6 +35,12 @@ struct DiscoverView: View {
                         Spacer()
                     }
                     .padding(.vertical, geometry.size.height * 0.01)
+                }
+                
+                VStack(alignment: .center) {
+                    ForEach(mc.connectedPeers, id: \.displayName) { peer in
+                        Text(peer.displayName)
+                    }
                 }
             }
         }
