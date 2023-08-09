@@ -15,12 +15,24 @@ struct Profile {
         Image(imageName)
     }
     var email: String
+    
+    init(name: String, imageName: String, email: String) {
+        self.name = name
+        self.imageName = imageName
+        self.email = email
+    }
+    
+    init(name: String) {
+        self.name = name
+        self.imageName = "Test"
+        self.email = "test@multipeer.com"
+    }
 }
 
 var testProfiles = [
     Profile(name: "Yuhan Zhang", imageName: "Avatar", email: "yuhan.zhang7@outlook.com"),
-    Profile(name: "John Appleseed", imageName: "Test", email: "test@apple.com"),
-    Profile(name: "Vivian Chou", imageName: "Test", email: "test@apple.com"),
-    Profile(name: "Rich Dinh", imageName: "Test", email: "test@apple.com"),
-    Profile(name: "Guillermo", imageName: "Test", email: "test@apple.com"),
+    Profile(name: "John Appleseed"),
+    Profile(name: "Vivian Chou"),
+    Profile(name: "Rich Dinh"),
+    Profile(name: "Guillermo")
 ]

@@ -1,0 +1,88 @@
+{
+  "" : {
+    "diagnostics" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/Find Nearby-master.dia",
+    "emit-module-dependencies" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/Find Nearby-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/Find Nearby-master-emit-module.dia",
+    "swift-dependencies" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/Find Nearby-master.swiftdeps"
+  },
+  "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "const-values" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftconstvalues",
+    "dependencies" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/GeneratedAssetSymbols.d",
+    "diagnostics" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/GeneratedAssetSymbols.dia",
+    "index-unit-output-path" : "/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "swift-dependencies" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftdeps",
+    "swiftmodule" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/GeneratedAssetSymbols~partial.swiftmodule"
+  },
+  "/Users/zhangyuhan/Developer/Find-Nearby/Find Nearby/ContentView.swift" : {
+    "const-values" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/ContentView.swiftconstvalues",
+    "dependencies" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/ContentView.d",
+    "diagnostics" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/ContentView.dia",
+    "index-unit-output-path" : "/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/ContentView.o",
+    "llvm-bc" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/ContentView.bc",
+    "object" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/ContentView.o",
+    "swift-dependencies" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/ContentView.swiftdeps",
+    "swiftmodule" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/ContentView~partial.swiftmodule"
+  },
+  "/Users/zhangyuhan/Developer/Find-Nearby/Find Nearby/DiscoverView.swift" : {
+    "const-values" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/DiscoverView.swiftconstvalues",
+    "dependencies" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/DiscoverView.d",
+    "diagnostics" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/DiscoverView.dia",
+    "index-unit-output-path" : "/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/DiscoverView.o",
+    "llvm-bc" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/DiscoverView.bc",
+    "object" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/DiscoverView.o",
+    "swift-dependencies" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/DiscoverView.swiftdeps",
+    "swiftmodule" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/DiscoverView~partial.swiftmodule"
+  },
+  "/Users/zhangyuhan/Developer/Find-Nearby/Find Nearby/Find_NearbyApp.swift" : {
+    "const-values" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/Find_NearbyApp.swiftconstvalues",
+    "dependencies" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/Find_NearbyApp.d",
+    "diagnostics" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/Find_NearbyApp.dia",
+    "index-unit-output-path" : "/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/Find_NearbyApp.o",
+    "llvm-bc" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/Find_NearbyApp.bc",
+    "object" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/Find_NearbyApp.o",
+    "swift-dependencies" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/Find_NearbyApp.swiftdeps",
+    "swiftmodule" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/Find_NearbyApp~partial.swiftmodule"
+  },
+  "/Users/zhangyuhan/Developer/Find-Nearby/Find Nearby/MCConnection.swift" : {
+    "const-values" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/MCConnection.swiftconstvalues",
+    "dependencies" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/MCConnection.d",
+    "diagnostics" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/MCConnection.dia",
+    "index-unit-output-path" : "/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/MCConnection.o",
+    "llvm-bc" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/MCConnection.bc",
+    "object" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/MCConnection.o",
+    "swift-dependencies" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/MCConnection.swiftdeps",
+    "swiftmodule" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/MCConnection~partial.swiftmodule"
+  },
+  "/Users/zhangyuhan/Developer/Find-Nearby/Find Nearby/Profile.swift" : {
+    "const-values" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/Profile.swiftconstvalues",
+    "dependencies" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/Profile.d",
+    "diagnostics" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/Profile.dia",
+    "index-unit-output-path" : "/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/Profile.o",
+    "llvm-bc" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/Profile.bc",
+    "object" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/Profile.o",
+    "swift-dependencies" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/Profile.swiftdeps",
+    "swiftmodule" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/Profile~partial.swiftmodule"
+  },
+  "/Users/zhangyuhan/Developer/Find-Nearby/Find Nearby/ProfileGrid.swift" : {
+    "const-values" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/ProfileGrid.swiftconstvalues",
+    "dependencies" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/ProfileGrid.d",
+    "diagnostics" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/ProfileGrid.dia",
+    "index-unit-output-path" : "/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/ProfileGrid.o",
+    "llvm-bc" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/ProfileGrid.bc",
+    "object" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/ProfileGrid.o",
+    "swift-dependencies" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/ProfileGrid.swiftdeps",
+    "swiftmodule" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/ProfileGrid~partial.swiftmodule"
+  },
+  "/Users/zhangyuhan/Developer/Find-Nearby/Find Nearby/ProfileView.swift" : {
+    "const-values" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/ProfileView.swiftconstvalues",
+    "dependencies" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/ProfileView.d",
+    "diagnostics" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/ProfileView.dia",
+    "index-unit-output-path" : "/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/ProfileView.o",
+    "llvm-bc" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/ProfileView.bc",
+    "object" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/ProfileView.o",
+    "swift-dependencies" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/ProfileView.swiftdeps",
+    "swiftmodule" : "/Users/zhangyuhan/Developer/Find-Nearby/build/Find Nearby.build/Debug-iphoneos/Find Nearby.build/Objects-normal/arm64/ProfileView~partial.swiftmodule"
+  }
+}

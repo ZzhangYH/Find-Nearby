@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct DiscoverView: View {
-    @StateObject var mc = MCConnection()
+    @StateObject var mc = MCManager()
     
     var body: some View {
         GeometryReader { geometry in
             ScrollView {
-                let numOfHS = Int(ceil(Double(testProfiles.count) / 2))
+                let count = mc.foundPeers.count
+                let numOfHS = Int(ceil(Double(count) / 2))
 
                 ForEach(0...numOfHS, id: \.self) { num in
                     let index = num * 2
@@ -21,13 +22,13 @@ struct DiscoverView: View {
                     HStack {
                         Spacer()
 
-                        if index < testProfiles.count {
-                            ProfileGrid(profile: testProfiles[index])
+                        if index < count {
+                            ProfileGrid(profile: Profile(name: mc.foundPeers[index].displayName))
                                 .scaleEffect(geometry.size.width / 393)
                                 .padding(.horizontal, geometry.size.width * 0.01)
                         }
-                        if index + 1 < testProfiles.count {
-                            ProfileGrid(profile: testProfiles[index + 1])
+                        if index + 1 < count {
+                            ProfileGrid(profile: Profile(name: mc.foundPeers[index + 1].displayName))
                                 .scaleEffect(geometry.size.width / 393)
                                 .padding(.horizontal, geometry.size.width * 0.01)
                         }
@@ -35,12 +36,6 @@ struct DiscoverView: View {
                         Spacer()
                     }
                     .padding(.vertical, geometry.size.height * 0.01)
-                }
-                
-                VStack(alignment: .center) {
-                    ForEach(mc.connectedPeers, id: \.displayName) { peer in
-                        Text(peer.displayName)
-                    }
                 }
             }
         }
