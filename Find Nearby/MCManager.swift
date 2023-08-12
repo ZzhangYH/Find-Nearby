@@ -1,5 +1,5 @@
 //
-//  MCConnection.swift
+//  MCManager.swift
 //  Find Nearby
 //
 //  Created by Yuhan Zhang on 2023/8/7.

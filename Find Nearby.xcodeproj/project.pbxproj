@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B33B14B22A7A4749001AF21C /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33B14B12A7A4749001AF21C /* DiscoverView.swift */; };
-		B34266AF2A80C4E000A8A0A5 /* MCConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34266AE2A80C4E000A8A0A5 /* MCConnection.swift */; };
+		B34266AF2A80C4E000A8A0A5 /* MCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34266AE2A80C4E000A8A0A5 /* MCManager.swift */; };
+		B34BF03A2A87EE1900DF31B1 /* InvitationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34BF0392A87EE1900DF31B1 /* InvitationHandler.swift */; };
 		B39C70332A78E01600F4FCF7 /* Find_NearbyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39C70322A78E01600F4FCF7 /* Find_NearbyApp.swift */; };
 		B39C70352A78E01600F4FCF7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39C70342A78E01600F4FCF7 /* ContentView.swift */; };
 		B39C70372A78E01700F4FCF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B39C70362A78E01700F4FCF7 /* Assets.xcassets */; };
@@ -16,11 +17,14 @@
 		B39C70432A78E2CD00F4FCF7 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39C70422A78E2CD00F4FCF7 /* Profile.swift */; };
 		B39C70452A78E58500F4FCF7 /* ProfileGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39C70442A78E58500F4FCF7 /* ProfileGrid.swift */; };
 		B39C70492A78F0E900F4FCF7 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39C70482A78F0E900F4FCF7 /* ProfileView.swift */; };
+		B3BF5EA62A878ABF007EFFB0 /* InvitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BF5EA52A878ABF007EFFB0 /* InvitationView.swift */; };
+		B3BF5EA82A879153007EFFB0 /* InvitationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BF5EA72A879153007EFFB0 /* InvitationButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B33B14B12A7A4749001AF21C /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
-		B34266AE2A80C4E000A8A0A5 /* MCConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCConnection.swift; sourceTree = "<group>"; };
+		B34266AE2A80C4E000A8A0A5 /* MCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCManager.swift; sourceTree = "<group>"; };
+		B34BF0392A87EE1900DF31B1 /* InvitationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationHandler.swift; sourceTree = "<group>"; };
 		B35EC3A52A83C0D000084C15 /* Find-Nearby-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Find-Nearby-Info.plist"; sourceTree = SOURCE_ROOT; };
 		B39C702F2A78E01600F4FCF7 /* Find Nearby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Find Nearby.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B39C70322A78E01600F4FCF7 /* Find_NearbyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Find_NearbyApp.swift; sourceTree = "<group>"; };
@@ -30,6 +34,8 @@
 		B39C70422A78E2CD00F4FCF7 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		B39C70442A78E58500F4FCF7 /* ProfileGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGrid.swift; sourceTree = "<group>"; };
 		B39C70482A78F0E900F4FCF7 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		B3BF5EA52A878ABF007EFFB0 /* InvitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationView.swift; sourceTree = "<group>"; };
+		B3BF5EA72A879153007EFFB0 /* InvitationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,9 +71,12 @@
 				B35EC3A52A83C0D000084C15 /* Find-Nearby-Info.plist */,
 				B39C70322A78E01600F4FCF7 /* Find_NearbyApp.swift */,
 				B39C70342A78E01600F4FCF7 /* ContentView.swift */,
-				B34266AE2A80C4E000A8A0A5 /* MCConnection.swift */,
+				B34266AE2A80C4E000A8A0A5 /* MCManager.swift */,
 				B39C70422A78E2CD00F4FCF7 /* Profile.swift */,
 				B33B14B12A7A4749001AF21C /* DiscoverView.swift */,
+				B34BF0392A87EE1900DF31B1 /* InvitationHandler.swift */,
+				B3BF5EA52A878ABF007EFFB0 /* InvitationView.swift */,
+				B3BF5EA72A879153007EFFB0 /* InvitationButton.swift */,
 				B39C70442A78E58500F4FCF7 /* ProfileGrid.swift */,
 				B39C70482A78F0E900F4FCF7 /* ProfileView.swift */,
 				B39C70362A78E01700F4FCF7 /* Assets.xcassets */,
@@ -155,12 +164,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				B39C70352A78E01600F4FCF7 /* ContentView.swift in Sources */,
+				B3BF5EA82A879153007EFFB0 /* InvitationButton.swift in Sources */,
 				B39C70432A78E2CD00F4FCF7 /* Profile.swift in Sources */,
 				B39C70492A78F0E900F4FCF7 /* ProfileView.swift in Sources */,
-				B34266AF2A80C4E000A8A0A5 /* MCConnection.swift in Sources */,
+				B34266AF2A80C4E000A8A0A5 /* MCManager.swift in Sources */,
 				B39C70332A78E01600F4FCF7 /* Find_NearbyApp.swift in Sources */,
 				B39C70452A78E58500F4FCF7 /* ProfileGrid.swift in Sources */,
+				B34BF03A2A87EE1900DF31B1 /* InvitationHandler.swift in Sources */,
 				B33B14B22A7A4749001AF21C /* DiscoverView.swift in Sources */,
+				B3BF5EA62A878ABF007EFFB0 /* InvitationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
