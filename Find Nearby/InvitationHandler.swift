@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct InvitationHandler: View {
+    @Binding var isShowSheet: Bool
+    
     var body: some View {
         NavigationView {
             List {
@@ -19,12 +21,19 @@ struct InvitationHandler: View {
             }
             .navigationTitle("All Invitations")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                Button {
+                    isShowSheet = false
+                } label: {
+                    Text("Close")
+                }
+            }
         }
     }
 }
 
-struct InvitationHandler_Previews: PreviewProvider {
-    static var previews: some View {
-        InvitationHandler()
-    }
-}
+//struct InvitationHandler_Previews: PreviewProvider {
+//    static var previews: some View {
+//        InvitationHandler()
+//    }
+//}

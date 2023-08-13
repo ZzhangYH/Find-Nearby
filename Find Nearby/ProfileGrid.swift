@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ProfileGrid: View {
+    @State private var showCircle = false
+    @State private var isLoading = false
+    
     var profile: Profile
     
     var body: some View {
@@ -18,16 +21,34 @@ struct ProfileGrid: View {
                 .cornerRadius(20)
             
             VStack(alignment: .center) {
-                profile.avatar
-                    .resizable()
-                    .frame(width: 75, height: 75)
-                    .clipShape(Circle())
+                ZStack {
+                    if showCircle {
+                        Circle()
+                            .rotation(.degrees(-85))
+                            .trim(from: 0.0, to: 0.975)
+                            .stroke(Color(UIColor.systemBlue),
+                                    style: StrokeStyle(lineWidth: 2, lineCap: .round))
+                            .opacity(0.8)
+                            .rotationEffect(.degrees(isLoading ? 360 : 0))
+                    }
+                    
+                    profile.avatar
+                        .resizable()
+                        .frame(width: 75, height: 75)
+                        .clipShape(Circle())
+                        .onTapGesture {
+                            showCircle.toggle()
+                            withAnimation(.easeInOut(duration: 2).repeatForever(autoreverses: false)) {
+                                isLoading.toggle()
+                            }
+                        }
+                }
+                .frame(width: 85, height: 85)
                 
                 Text(profile.name)
                     .multilineTextAlignment(.center)
                     .lineLimit(2)
                     .frame(width: 105, height: 45)
-                    .offset(y: 5)
             }
         }
     }

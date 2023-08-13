@@ -51,7 +51,7 @@ struct DiscoverView: View {
                     }
                 }
                 .sheet(isPresented: $showInvitations) {
-                    InvitationHandler()
+                    InvitationHandler(isShowSheet: $showInvitations)
                 }
             }
         }
