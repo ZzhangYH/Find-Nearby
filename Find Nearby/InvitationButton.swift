@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct InvitationButton: View {
+    @GestureState private var isPressed = false
     var control: Bool
     
     var body: some View {

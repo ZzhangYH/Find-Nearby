@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct InvitationView: View {
+    @ObservedObject var mc: MCManager
+    
     var name: String
     
     var body: some View {
@@ -35,20 +37,20 @@ struct InvitationView: View {
                 HStack(spacing: geometry.size.width * 0.05) {
                     InvitationButton(control: true)
                         .scaleEffect(geometry.size.width / 393)
+                        .onTapGesture {
+                            mc.isAcceptingInvitation = true
+                        }
                     
                     InvitationButton(control: false)
                         .scaleEffect(geometry.size.width / 393)
+                        .onTapGesture {
+                            mc.isAcceptingInvitation = false
+                        }
                 }
                 .padding()
                 
                 Spacer()
             }
         }
-    }
-}
-
-struct InvitationView_Previews: PreviewProvider {
-    static var previews: some View {
-        InvitationView(name: "Test")
     }
 }

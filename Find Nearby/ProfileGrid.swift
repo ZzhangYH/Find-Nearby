@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import MultipeerConnectivity
 
 struct ProfileGrid: View {
+    @ObservedObject var mc: MCManager
+    
     @State private var showCircle = false
     @State private var isLoading = false
     
-    var profile: Profile
+    var peerID: MCPeerID
     
     var body: some View {
         ZStack {
@@ -32,7 +35,7 @@ struct ProfileGrid: View {
                             .rotationEffect(.degrees(isLoading ? 360 : 0))
                     }
                     
-                    profile.avatar
+                    Image("Test")
                         .resizable()
                         .frame(width: 75, height: 75)
                         .clipShape(Circle())
@@ -41,21 +44,18 @@ struct ProfileGrid: View {
                             withAnimation(.easeInOut(duration: 2).repeatForever(autoreverses: false)) {
                                 isLoading.toggle()
                             }
+                            if isLoading {
+                                mc.serviceBrowser.invitePeer(peerID, to: mc.session, withContext: nil, timeout: 10)
+                            }
                         }
                 }
                 .frame(width: 85, height: 85)
                 
-                Text(profile.name)
+                Text(peerID.displayName)
                     .multilineTextAlignment(.center)
                     .lineLimit(2)
                     .frame(width: 105, height: 45)
             }
         }
-    }
-}
-
-struct ProfileGrid_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileGrid(profile: testProfiles[1])
     }
 }

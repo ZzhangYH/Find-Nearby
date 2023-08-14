@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct InvitationHandler: View {
+    @ObservedObject var mc: MCManager
+    
     @Binding var isShowSheet: Bool
     
     var body: some View {
         NavigationView {
             List {
                 NavigationLink {
-                    InvitationView(name: "test")
+                    InvitationView(mc: mc, name: "test")
                 } label: {
                     Text("test")
                 }
@@ -31,9 +33,3 @@ struct InvitationHandler: View {
         }
     }
 }
-
-//struct InvitationHandler_Previews: PreviewProvider {
-//    static var previews: some View {
-//        InvitationHandler()
-//    }
-//}

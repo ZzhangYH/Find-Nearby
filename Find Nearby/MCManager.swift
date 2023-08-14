@@ -9,14 +9,15 @@ import Foundation
 import MultipeerConnectivity
 
 class MCManager: NSObject, ObservableObject {
-
-    @Published var foundPeers: [MCPeerID] = []
     
     private var serviceType = "find-nearby"
     private var peerID: MCPeerID
-    private var session: MCSession
-    private var serviceAdvertiser: MCNearbyServiceAdvertiser
-    private var serviceBrowser: MCNearbyServiceBrowser
+    @Published var session: MCSession
+    @Published var serviceAdvertiser: MCNearbyServiceAdvertiser
+    @Published var serviceBrowser: MCNearbyServiceBrowser
+    
+    @Published var foundPeers: [MCPeerID] = []
+    @Published var isAcceptingInvitation = false
     
     override init() {
         peerID = MCPeerID(displayName: "test")
@@ -77,7 +78,7 @@ extension MCManager: MCSessionDelegate {
 extension MCManager: MCNearbyServiceAdvertiserDelegate {
 
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-        
+        invitationHandler(isAcceptingInvitation, session)
     }
 
 }

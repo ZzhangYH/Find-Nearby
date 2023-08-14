@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DiscoverView: View {
     @StateObject var mc = MCManager()
+    
     @State private var showInvitations = false
     
     var body: some View {
@@ -27,12 +28,12 @@ struct DiscoverView: View {
                             Spacer()
 
                             if index < count {
-                                ProfileGrid(profile: Profile(name: mc.foundPeers[index].displayName))
+                                ProfileGrid(mc: mc, peerID: mc.foundPeers[index])
                                     .scaleEffect(geometry.size.width / 393)
                                     .padding(.horizontal, geometry.size.width * 0.01)
                             }
                             if index + 1 < count {
-                                ProfileGrid(profile: Profile(name: mc.foundPeers[index + 1].displayName))
+                                ProfileGrid(mc: mc, peerID: mc.foundPeers[index + 1])
                                     .scaleEffect(geometry.size.width / 393)
                                     .padding(.horizontal, geometry.size.width * 0.01)
                             }
@@ -51,7 +52,7 @@ struct DiscoverView: View {
                     }
                 }
                 .sheet(isPresented: $showInvitations) {
-                    InvitationHandler(isShowSheet: $showInvitations)
+                    InvitationHandler(mc: mc, isShowSheet: $showInvitations)
                 }
             }
         }
