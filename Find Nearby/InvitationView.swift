@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct InvitationView: View {
-    @ObservedObject var mc: MCManager
+    @EnvironmentObject var mc: MCManager
     
     var name: String
     
@@ -52,5 +52,12 @@ struct InvitationView: View {
                 Spacer()
             }
         }
+    }
+}
+
+struct InvitationView_Previews: PreviewProvider {
+    static var previews: some View {
+        InvitationView(name: "Test")
+            .environmentObject(MCManager())
     }
 }

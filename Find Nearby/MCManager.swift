@@ -16,6 +16,7 @@ class MCManager: NSObject, ObservableObject {
     @Published var serviceAdvertiser: MCNearbyServiceAdvertiser
     @Published var serviceBrowser: MCNearbyServiceBrowser
     
+    @Published var profile = Profile.default
     @Published var foundPeers: [MCPeerID] = []
     @Published var isAcceptingInvitation = false
     

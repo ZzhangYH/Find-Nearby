@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct InvitationHandler: View {
-    @ObservedObject var mc: MCManager
+    @EnvironmentObject var mc: MCManager
     
     @Binding var isShowSheet: Bool
     
@@ -16,7 +16,8 @@ struct InvitationHandler: View {
         NavigationView {
             List {
                 NavigationLink {
-                    InvitationView(mc: mc, name: "test")
+                    InvitationView(name: "Test")
+                        .environmentObject(mc)
                 } label: {
                     Text("test")
                 }

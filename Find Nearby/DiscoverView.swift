@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct DiscoverView: View {
-    @StateObject var mc = MCManager()
+    @EnvironmentObject var mc: MCManager
     
     @State private var showInvitations = false
     
     var body: some View {
-        GeometryReader { geometry in
-            NavigationView {
-                ScrollView {
+        NavigationView {
+            ScrollView {
+                GeometryReader { geometry in
                     let count = mc.foundPeers.count
                     let numOfHS = Int(ceil(Double(count) / 2))
                     
@@ -28,12 +28,14 @@ struct DiscoverView: View {
                             Spacer()
 
                             if index < count {
-                                ProfileGrid(mc: mc, peerID: mc.foundPeers[index])
+                                PeerGrid(peerID: mc.foundPeers[index])
+                                    .environmentObject(mc)
                                     .scaleEffect(geometry.size.width / 393)
                                     .padding(.horizontal, geometry.size.width * 0.01)
                             }
                             if index + 1 < count {
-                                ProfileGrid(mc: mc, peerID: mc.foundPeers[index + 1])
+                                PeerGrid(peerID: mc.foundPeers[index + 1])
+                                    .environmentObject(mc)
                                     .scaleEffect(geometry.size.width / 393)
                                     .padding(.horizontal, geometry.size.width * 0.01)
                             }
@@ -52,7 +54,8 @@ struct DiscoverView: View {
                     }
                 }
                 .sheet(isPresented: $showInvitations) {
-                    InvitationHandler(mc: mc, isShowSheet: $showInvitations)
+                    InvitationHandler(isShowSheet: $showInvitations)
+                        .environmentObject(mc)
                 }
             }
         }
@@ -62,5 +65,6 @@ struct DiscoverView: View {
 struct DiscoverView_Previews: PreviewProvider {
     static var previews: some View {
         DiscoverView()
+            .environmentObject(MCManager())
     }
 }

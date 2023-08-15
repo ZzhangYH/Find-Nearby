@@ -1,5 +1,5 @@
 //
-//  ProfileGrid.swift
+//  PeerGrid.swift
 //  Find Nearby
 //
 //  Created by Yuhan Zhang on 2023/8/1.
@@ -8,8 +8,8 @@
 import SwiftUI
 import MultipeerConnectivity
 
-struct ProfileGrid: View {
-    @ObservedObject var mc: MCManager
+struct PeerGrid: View {
+    @EnvironmentObject var mc: MCManager
     
     @State private var showCircle = false
     @State private var isLoading = false

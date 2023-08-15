@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var mc = MCManager()
     @State private var selection: Tab = .discover
     
     enum Tab {
@@ -19,12 +20,14 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: $selection) {
             DiscoverView()
+                .environmentObject(mc)
                 .tabItem {
                     Label("Discover", systemImage: "wifi.square")
                 }
                 .tag(Tab.discover)
             
-            ProfileView(profile: testProfiles[0])
+            ProfileView()
+                .environmentObject(mc)
                 .tabItem {
                     Label("Profile", systemImage: "person.circle")
                 }
