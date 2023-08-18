@@ -32,7 +32,7 @@ struct ProfileSummary: View {
 
                 List {
                     VStack(alignment: .leading) {
-                        Text("Email")
+                        Text("Email address")
                             .font(.caption)
                         Text(profile.email)
                             .font(.callout)

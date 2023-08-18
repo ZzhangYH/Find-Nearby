@@ -19,7 +19,7 @@ struct DiscoverView: View {
                     let count = mc.foundPeers.count
                     let numOfHS = Int(ceil(Double(count) / 2))
                     
-                    Spacer(minLength: geometry.size.height * 0.01)
+                    Spacer(minLength: geometry.size.height * 0.05)
                     
                     ForEach(0...numOfHS, id: \.self) { num in
                         let index = num * 2
@@ -45,6 +45,7 @@ struct DiscoverView: View {
                         .padding(.vertical, geometry.size.height * 0.01)
                     }
                 }
+                .padding()
                 .navigationTitle("Find Nearby")
                 .toolbar {
                     Button {

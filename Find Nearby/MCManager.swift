@@ -9,24 +9,59 @@ import Foundation
 import MultipeerConnectivity
 
 class MCManager: NSObject, ObservableObject {
+
+    let defaults = UserDefaults.standard
     
-    private var serviceType = "find-nearby"
-    private var peerID: MCPeerID
-    @Published var session: MCSession
-    @Published var serviceAdvertiser: MCNearbyServiceAdvertiser
-    @Published var serviceBrowser: MCNearbyServiceBrowser
+    let serviceType = "find-nearby"
+    var profile: Profile
+    var peerID: MCPeerID
+    var session: MCSession
+    var serviceAdvertiser: MCNearbyServiceAdvertiser
+    var serviceBrowser: MCNearbyServiceBrowser
     
-    @Published var profile = Profile.default
     @Published var foundPeers: [MCPeerID] = []
-    @Published var isAcceptingInvitation = false
     
     override init() {
-        peerID = MCPeerID(displayName: "test")
+        profile = Profile.default
+        peerID = MCPeerID(displayName: defaults.string(forKey: "Name") ?? UIDevice.current.name)
         session = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         serviceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: serviceType)
         serviceBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
         
         super.init()
+        loadMC()
+    }
+    
+    deinit {
+        serviceAdvertiser.stopAdvertisingPeer()
+        serviceBrowser.stopBrowsingForPeers()
+    }
+    
+    func saveToDefaults(profile: Profile) {
+        self.profile = profile
+        defaults.set(profile.name, forKey: "Name")
+        defaults.set(profile.email, forKey: "Email")
+        defaults.set(profile.allowOthersToFindYou, forKey: "AllowOthersToFindYou")
+        loadMC()
+    }
+
+    func readFromDefaults() -> Profile {
+        return Profile(name: defaults.string(forKey: "Name") ?? "Default",
+                       email: defaults.string(forKey: "Email") ?? "default@multipeer.com",
+                       allowOthersToFindYou: defaults.bool(forKey: "AllowOthersToFindYou"))
+    }
+    
+    func loadMC() {
+        serviceAdvertiser.stopAdvertisingPeer()
+        serviceBrowser.stopBrowsingForPeers()
+        
+        foundPeers.removeAll()
+        
+        profile = readFromDefaults()
+        peerID = MCPeerID(displayName: profile.name)
+        session = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
+        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: serviceType)
+        serviceBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
         
         session.delegate = self
         serviceAdvertiser.delegate = self
@@ -34,11 +69,6 @@ class MCManager: NSObject, ObservableObject {
         
         serviceAdvertiser.startAdvertisingPeer()
         serviceBrowser.startBrowsingForPeers()
-    }
-    
-    deinit {
-        serviceAdvertiser.stopAdvertisingPeer()
-        serviceBrowser.stopBrowsingForPeers()
     }
 
 }
@@ -79,7 +109,7 @@ extension MCManager: MCSessionDelegate {
 extension MCManager: MCNearbyServiceAdvertiserDelegate {
 
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-        invitationHandler(isAcceptingInvitation, session)
+        invitationHandler(profile.allowOthersToFindYou, session)
     }
 
 }

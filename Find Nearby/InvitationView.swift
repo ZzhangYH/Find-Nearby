@@ -38,13 +38,13 @@ struct InvitationView: View {
                     InvitationButton(control: true)
                         .scaleEffect(geometry.size.width / 393)
                         .onTapGesture {
-                            mc.isAcceptingInvitation = true
+                            
                         }
                     
                     InvitationButton(control: false)
                         .scaleEffect(geometry.size.width / 393)
                         .onTapGesture {
-                            mc.isAcceptingInvitation = false
+                            
                         }
                 }
                 .padding()

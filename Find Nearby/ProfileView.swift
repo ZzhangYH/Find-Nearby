@@ -10,12 +10,12 @@ import SwiftUI
 struct ProfileView: View {
     @EnvironmentObject var mc: MCManager
     
-    @State private var isEditing = false
+    @State var editMode: EditMode = .inactive
     @State private var draftProfile = Profile.default
     
     var body: some View {
         ZStack {
-            if !isEditing {
+            if editMode == .inactive {
                 ProfileSummary(profile: mc.profile)
             } else {
                 ProfileEditor(profile: $draftProfile)
@@ -23,38 +23,28 @@ struct ProfileView: View {
                         draftProfile = mc.profile
                     }
                     .onDisappear {
-                        mc.profile = draftProfile
+                        if draftProfile != mc.profile {
+                            mc.saveToDefaults(profile: draftProfile)
+                        }
                     }
             }
             
             VStack {
                 HStack {
-                    if isEditing {
-                        Button(action: {
+                    if editMode == .active {
+                        Button("Cancel", role: .cancel) {
                             draftProfile = mc.profile
                             withAnimation {
-                                isEditing = false
+                                editMode = .inactive
                             }
-                        }, label: {
-                            Text("Cancel").foregroundColor(Color(UIColor.systemBlue))
-                        })
+                        }
                     }
                     
                     Spacer()
                     
-                    Button(action: {
-                        withAnimation {
-                            isEditing.toggle()
-                        }
-                    }, label: {
-                        if !isEditing {
-                            Text("Edit").foregroundColor(Color(UIColor.systemBlue))
-                        } else {
-                            Text("Done").foregroundColor(Color(UIColor.systemBlue))
-                        }
-                    })
+                    EditButton()
                 }
-                .environment(\.editMode, .constant(isEditing ? EditMode.active : EditMode.inactive))
+                .environment(\.editMode, $editMode)
                 .padding()
                 
                 Spacer()

@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct Profile {
+struct Profile: Equatable {
     var name: String
     var imageName = "Test"
     var avatar: Image {
@@ -18,4 +18,13 @@ struct Profile {
     var allowOthersToFindYou = false
     
     static let `default` = Profile(name: "Default")
+    
+    func equals(profile: Profile) -> Bool {
+        if self.name != profile.name { return false }
+        if self.email != profile.email { return false }
+        if self.allowOthersToFindYou != profile.allowOthersToFindYou { return false }
+        return true
+    }
 }
+
+
