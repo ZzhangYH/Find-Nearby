@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import MultipeerConnectivity
 
 struct InvitationView: View {
     @EnvironmentObject var mc: MCManager
     
-    var name: String
+    var peerID: MCPeerID
     
     var body: some View {
         GeometryReader { geometry in
@@ -27,7 +28,7 @@ struct InvitationView: View {
                     .offset(y: -geometry.size.width * 0.3)
                     .padding(.bottom, -geometry.size.width * 0.3)
                 
-                Text(name)
+                Text(peerID.displayName)
                     .bold()
                     .font(.title)
                     .padding(10)
@@ -44,7 +45,9 @@ struct InvitationView: View {
                     InvitationButton(control: false)
                         .scaleEffect(geometry.size.width / 393)
                         .onTapGesture {
-                            
+                            if mc.connectedPeers.contains(peerID) {
+                                mc.session.cancelConnectPeer(peerID)
+                            }
                         }
                 }
                 .padding()
@@ -52,12 +55,5 @@ struct InvitationView: View {
                 Spacer()
             }
         }
-    }
-}
-
-struct InvitationView_Previews: PreviewProvider {
-    static var previews: some View {
-        InvitationView(name: "Test")
-            .environmentObject(MCManager())
     }
 }

@@ -55,7 +55,7 @@ struct DiscoverView: View {
                     }
                 }
                 .sheet(isPresented: $showInvitations) {
-                    InvitationHandler(isShowSheet: $showInvitations)
+                    InvitationList(isShowSheet: $showInvitations)
                         .environmentObject(mc)
                 }
             }

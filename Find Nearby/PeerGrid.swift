@@ -40,12 +40,15 @@ struct PeerGrid: View {
                         .frame(width: 75, height: 75)
                         .clipShape(Circle())
                         .onTapGesture {
+                            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                             showCircle.toggle()
                             withAnimation(.easeInOut(duration: 2).repeatForever(autoreverses: false)) {
                                 isLoading.toggle()
                             }
                             if isLoading {
-                                mc.serviceBrowser.invitePeer(peerID, to: mc.session, withContext: nil, timeout: 10)
+                                mc.serviceBrowser.invitePeer(peerID, to: mc.session, withContext: nil, timeout: 60)
+                            } else {
+                                mc.session.cancelConnectPeer(peerID)
                             }
                         }
                 }

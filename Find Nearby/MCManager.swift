@@ -20,6 +20,7 @@ class MCManager: NSObject, ObservableObject {
     var serviceBrowser: MCNearbyServiceBrowser
     
     @Published var foundPeers: [MCPeerID] = []
+    @Published var connectedPeers: [MCPeerID] = []
     
     override init() {
         profile = Profile.default
@@ -60,7 +61,9 @@ class MCManager: NSObject, ObservableObject {
         profile = readFromDefaults()
         peerID = MCPeerID(displayName: profile.name)
         session = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
-        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: serviceType)
+        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID,
+                                                      discoveryInfo: ["isAllowed": profile.allowOthersToFindYou ? "Yes" : "No"],
+                                                      serviceType: serviceType)
         serviceBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
         
         session.delegate = self
@@ -85,6 +88,10 @@ extension MCManager: MCSessionDelegate {
                 print("Not connected: \(peerID.displayName)")
             @unknown default:
                 print("Unknown state received: \(peerID.displayName)")
+        }
+        
+        DispatchQueue.main.async {
+            self.connectedPeers = session.connectedPeers
         }
     }
     
@@ -117,11 +124,15 @@ extension MCManager: MCNearbyServiceAdvertiserDelegate {
 extension MCManager: MCNearbyServiceBrowserDelegate {
 
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        foundPeers.append(peerID)
+        if info?["isAllowed"] == "Yes" {
+            foundPeers.append(peerID)
+        }
     }
     
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-        foundPeers.remove(at: foundPeers.firstIndex(of: peerID)!)
+        if foundPeers.contains(peerID) {
+            foundPeers.remove(at: foundPeers.firstIndex(of: peerID)!)
+        }
     }
 
 }
