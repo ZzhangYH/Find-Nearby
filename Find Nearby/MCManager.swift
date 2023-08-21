@@ -21,6 +21,7 @@ class MCManager: NSObject, ObservableObject {
     
     @Published var foundPeers: [MCPeerID] = []
     @Published var connectedPeers: [MCPeerID] = []
+    @Published var message: String = ""
     
     override init() {
         profile = Profile.default
@@ -57,6 +58,8 @@ class MCManager: NSObject, ObservableObject {
         serviceBrowser.stopBrowsingForPeers()
         
         foundPeers.removeAll()
+        connectedPeers.removeAll()
+        message = ""
         
         profile = readFromDefaults()
         peerID = MCPeerID(displayName: profile.name)
@@ -96,7 +99,11 @@ extension MCManager: MCSessionDelegate {
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        
+        if let message = String(data: data, encoding: .utf8) {
+            DispatchQueue.main.async {
+                self.message = message
+            }
+        }
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {

@@ -19,6 +19,13 @@ struct ContentView: View {
     
     var body: some View {
         TabView(selection: $selection) {
+            ChatView()
+                .environmentObject(mc)
+                .tabItem {
+                    Label("Chat", systemImage: "message.circle")
+                }
+                .tag(Tab.chat)
+            
             DiscoverView()
                 .environmentObject(mc)
                 .tabItem {

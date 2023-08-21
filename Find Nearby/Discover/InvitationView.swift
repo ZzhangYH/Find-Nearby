@@ -12,6 +12,7 @@ struct InvitationView: View {
     @EnvironmentObject var mc: MCManager
     
     var peerID: MCPeerID
+    @State private var isAccepted = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -36,11 +37,13 @@ struct InvitationView: View {
                 Text("wants to start a session with you.")
                 
                 HStack(spacing: geometry.size.width * 0.05) {
-                    InvitationButton(control: true)
-                        .scaleEffect(geometry.size.width / 393)
-                        .onTapGesture {
-                            
-                        }
+                    NavigationLink {
+                        ChatDetail(peerID: peerID)
+                            .environmentObject(mc)
+                    } label: {
+                        InvitationButton(control: true)
+                            .scaleEffect(geometry.size.width / 393)
+                    }
                     
                     InvitationButton(control: false)
                         .scaleEffect(geometry.size.width / 393)
