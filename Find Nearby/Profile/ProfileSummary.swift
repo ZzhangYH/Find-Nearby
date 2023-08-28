@@ -14,11 +14,11 @@ struct ProfileSummary: View {
         GeometryReader { geometry in
             VStack(alignment: .center) {
                 Rectangle()
-                    .fill(Color(UIColor.systemGray4))
+                    .fill(.tertiary)
                     .ignoresSafeArea(edges: .top)
                     .frame(height: geometry.size.height * 0.3)
 
-                profile.avatar
+                Image(uiImage: profile.avatar)
                     .resizable()
                     .frame(width: geometry.size.width * 0.45, height: geometry.size.width * 0.45)
                     .clipShape(Circle())
@@ -36,7 +36,7 @@ struct ProfileSummary: View {
                             .font(.caption)
                         Text(profile.email)
                             .font(.callout)
-                            .foregroundColor(Color(UIColor.systemBlue))
+                            .foregroundColor(.accentColor)
                     }
                     .padding(.vertical, geometry.size.height * 0.005)
                     
@@ -45,7 +45,7 @@ struct ProfileSummary: View {
                             .font(.caption)
                         Text(profile.allowOthersToFindYou ? "Yes" : "No")
                             .font(.callout)
-                            .foregroundColor(Color(UIColor.systemBlue))
+                            .foregroundColor(.accentColor)
                     }
                     .padding(.vertical, geometry.size.height * 0.005)
                 }

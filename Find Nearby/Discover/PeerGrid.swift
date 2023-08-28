@@ -29,7 +29,7 @@ struct PeerGrid: View {
                         Circle()
                             .rotation(.degrees(-85))
                             .trim(from: 0.0, to: 0.975)
-                            .stroke(Color(UIColor.systemBlue),
+                            .stroke(Color.accentColor,
                                     style: StrokeStyle(lineWidth: 2, lineCap: .round))
                             .opacity(0.8)
                             .rotationEffect(.degrees(isLoading ? 360 : 0))

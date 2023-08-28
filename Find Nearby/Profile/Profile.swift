@@ -10,10 +10,7 @@ import SwiftUI
 
 struct Profile: Equatable {
     var name: String
-    var imageName = "Test"
-    var avatar: Image {
-        Image(imageName)
-    }
+    var avatar = UIImage(named: "Test")!
     var email = "default@multipeer.com"
     var allowOthersToFindYou = false
     
@@ -21,10 +18,9 @@ struct Profile: Equatable {
     
     func equals(profile: Profile) -> Bool {
         if self.name != profile.name { return false }
+        if self.avatar != profile.avatar { return false }
         if self.email != profile.email { return false }
         if self.allowOthersToFindYou != profile.allowOthersToFindYou { return false }
         return true
     }
 }
-
-

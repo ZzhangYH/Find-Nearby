@@ -23,8 +23,8 @@ struct ChatView: View {
                         }
                     }
                 } header: {
-                    Text("\(Image(systemName: "person.crop.circle.badge.checkmark").renderingMode(.original)) ")
-                        .foregroundColor(Color(UIColor.systemBlue)) +
+                    Text("\(Image(systemName: "person.crop.circle.badge.checkmark")) ")
+                        .foregroundColor(.accentColor) +
                     Text("Connected Peers")
                 }
             }

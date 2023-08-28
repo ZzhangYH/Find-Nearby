@@ -47,7 +47,7 @@ struct InvitationList: View {
                                     
                                     Text("Change discovery preference in ") +
                                     Text("\(Image(systemName: "person.circle.fill")) Profile \(Image(systemName: "chevron.right")) Edit")
-                                        .foregroundColor(Color(UIColor.systemBlue))
+                                        .foregroundColor(.accentColor)
                                 }
                             }
                             .font(.footnote)

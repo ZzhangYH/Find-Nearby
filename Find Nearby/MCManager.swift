@@ -7,6 +7,7 @@
 
 import Foundation
 import MultipeerConnectivity
+import SwiftUI
 
 class MCManager: NSObject, ObservableObject {
 
@@ -42,6 +43,7 @@ class MCManager: NSObject, ObservableObject {
     func saveToDefaults(profile: Profile) {
         self.profile = profile
         defaults.set(profile.name, forKey: "Name")
+        defaults.set(profile.avatar.base64, forKey: "Avatar")
         defaults.set(profile.email, forKey: "Email")
         defaults.set(profile.allowOthersToFindYou, forKey: "AllowOthersToFindYou")
         loadMC()
@@ -49,6 +51,7 @@ class MCManager: NSObject, ObservableObject {
 
     func readFromDefaults() -> Profile {
         return Profile(name: defaults.string(forKey: "Name") ?? "Default",
+                       avatar: (defaults.string(forKey: "Avatar")?.imageFromBase64 ?? UIImage(named: "Test"))!,
                        email: defaults.string(forKey: "Email") ?? "default@multipeer.com",
                        allowOthersToFindYou: defaults.bool(forKey: "AllowOthersToFindYou"))
     }
@@ -142,4 +145,17 @@ extension MCManager: MCNearbyServiceBrowserDelegate {
         }
     }
 
+}
+
+extension UIImage {
+    var base64: String {
+        self.jpegData(compressionQuality: 1)?.base64EncodedString() ?? ""
+    }
+}
+
+extension String {
+    var imageFromBase64: UIImage {
+        let imageData = Data(base64Encoded: self, options: .ignoreUnknownCharacters)
+        return UIImage(data: imageData!)!
+    }
 }
