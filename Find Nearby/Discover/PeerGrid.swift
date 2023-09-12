@@ -35,8 +35,9 @@ struct PeerGrid: View {
                             .rotationEffect(.degrees(isLoading ? 360 : 0))
                     }
                     
-                    Image("Test")
+                    Image(systemName: "person.crop.circle")
                         .resizable()
+                        .foregroundColor(.secondary)
                         .frame(width: 75, height: 75)
                         .clipShape(Circle())
                         .onTapGesture {
