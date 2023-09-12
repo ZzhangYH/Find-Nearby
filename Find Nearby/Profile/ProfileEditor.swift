@@ -18,7 +18,7 @@ struct ProfileEditor: View {
                 HStack {}
                     .padding()
                 
-                Image(uiImage: profile.avatar)
+                Image(uiImage: UIImage(data: profile.avatar)!)
                     .resizable()
                     .frame(width: geometry.size.width * 0.3, height: geometry.size.width * 0.3)
                     .clipShape(Circle())
@@ -46,7 +46,7 @@ struct ProfileEditor: View {
                             .padding()
                     }
                     
-                    Toggle(isOn: $profile.allowOthersToFindYou) {
+                    Toggle(isOn: $profile.isAdvertising) {
                         Text("Allow others to find you?").font(.subheadline).bold()
                     }
                     .padding(.vertical)
@@ -58,7 +58,7 @@ struct ProfileEditor: View {
             Task {
                 if let data = try? await avatarItem?.loadTransferable(type: Data.self) {
                     if let uiImage = UIImage(data: data) {
-                        profile.avatar = uiImage
+                        profile.avatar = uiImage.pngData()!
                     }
                 }
             }

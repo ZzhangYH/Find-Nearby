@@ -22,14 +22,20 @@ struct ChatDetail: View {
     
     var body: some View {
         VStack {
+            Image(uiImage: UIImage(data: mc.profiles[peerID]?.avatar ?? Profile.default.avatar)!)
+                .resizable()
+                .frame(width: 70, height: 70)
+                .clipShape(Circle())
+                .padding(.bottom, 5)
+            
             Text(peerID.displayName)
-                .font(.title).bold()
+                .font(.callout)
             
             Spacer()
             
-            Text(mc.message)
+            Text(mc.messages[peerID] ?? "")
             
-            Image(uiImage: mc.image)
+            Image(uiImage: mc.images[peerID] ?? UIImage())
                 .resizable()
                 .scaledToFit()
                 .padding()

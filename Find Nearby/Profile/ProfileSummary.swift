@@ -18,7 +18,7 @@ struct ProfileSummary: View {
                     .ignoresSafeArea(edges: .top)
                     .frame(height: geometry.size.height * 0.3)
 
-                Image(uiImage: profile.avatar)
+                Image(uiImage: UIImage(data: profile.avatar)!)
                     .resizable()
                     .frame(width: geometry.size.width * 0.45, height: geometry.size.width * 0.45)
                     .clipShape(Circle())
@@ -43,7 +43,7 @@ struct ProfileSummary: View {
                     VStack(alignment: .leading) {
                         Text("Allow others to find you?")
                             .font(.caption)
-                        Text(profile.allowOthersToFindYou ? "Yes" : "No")
+                        Text(profile.isAdvertising ? "Yes" : "No")
                             .font(.callout)
                             .foregroundColor(.accentColor)
                     }

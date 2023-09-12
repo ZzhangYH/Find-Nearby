@@ -22,8 +22,9 @@ class MCManager: NSObject, ObservableObject {
     
     @Published var foundPeers: [MCPeerID] = []
     @Published var connectedPeers: [MCPeerID] = []
-    @Published var message: String = ""
-    @Published var image: UIImage = UIImage()
+    @Published var messages: [MCPeerID : String] = [:]
+    @Published var images: [MCPeerID : UIImage] = [:]
+    @Published var profiles: [MCPeerID : Profile] = [:]
     
     override init() {
         profile = Profile.default
@@ -41,44 +42,52 @@ class MCManager: NSObject, ObservableObject {
         serviceBrowser.stopBrowsingForPeers()
     }
     
-    func saveToDefaults(profile: Profile) {
-        self.profile = profile
-        defaults.set(profile.name, forKey: "Name")
-        defaults.set(profile.avatar.base64, forKey: "Avatar")
-        defaults.set(profile.email, forKey: "Email")
-        defaults.set(profile.allowOthersToFindYou, forKey: "AllowOthersToFindYou")
-        loadMC()
-    }
-
-    func readFromDefaults() -> Profile {
-        return Profile(name: defaults.string(forKey: "Name") ?? "Default",
-                       avatar: (defaults.string(forKey: "Avatar")?.imageFromBase64 ?? UIImage(named: "Test"))!,
-                       email: defaults.string(forKey: "Email") ?? "default@multipeer.com",
-                       allowOthersToFindYou: defaults.bool(forKey: "AllowOthersToFindYou"))
-    }
-    
     func loadMC() {
         serviceAdvertiser.stopAdvertisingPeer()
         serviceBrowser.stopBrowsingForPeers()
         
         foundPeers.removeAll()
         connectedPeers.removeAll()
-        message = ""
         
         profile = readFromDefaults()
         peerID = MCPeerID(displayName: profile.name)
         session = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
-        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID,
-                                                      discoveryInfo: ["isAllowed": profile.allowOthersToFindYou ? "Yes" : "No"],
-                                                      serviceType: serviceType)
+        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: serviceType)
         serviceBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
         
         session.delegate = self
         serviceAdvertiser.delegate = self
         serviceBrowser.delegate = self
         
-        serviceAdvertiser.startAdvertisingPeer()
-        serviceBrowser.startBrowsingForPeers()
+        if profile.isAdvertising {
+            serviceAdvertiser.startAdvertisingPeer()
+        }
+    }
+    
+    var isBrowsing = false {
+        didSet {
+            if isBrowsing {
+                serviceBrowser.startBrowsingForPeers()
+            } else {
+                serviceBrowser.stopBrowsingForPeers()
+            }
+        }
+    }
+    
+    func saveToDefaults(profile: Profile) {
+        self.profile = profile
+        defaults.set(profile.name, forKey: "Name")
+        defaults.set(profile.avatar, forKey: "Avatar")
+        defaults.set(profile.email, forKey: "Email")
+        defaults.set(profile.isAdvertising, forKey: "isAdvertising")
+        loadMC()
+    }
+    
+    func readFromDefaults() -> Profile {
+        return Profile(name: defaults.string(forKey: "Name") ?? "Default",
+                       avatar: defaults.data(forKey: "Avatar") ?? UIImage(named: "Test")!.pngData()!,
+                       email: defaults.string(forKey: "Email") ?? "default@multipeer.com",
+                       isAdvertising: defaults.bool(forKey: "isAdvertising"))
     }
 
 }
@@ -105,12 +114,17 @@ extension MCManager: MCSessionDelegate {
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         if let message = String(data: data, encoding: .utf8) {
             DispatchQueue.main.async {
-                self.message = message
+                self.messages[peerID] = message
             }
         }
         if let image = UIImage(data: data) {
             DispatchQueue.main.async {
-                self.image = image
+                self.images[peerID] = image
+            }
+        }
+        if let profile = try? JSONDecoder().decode(Profile.self, from: data) {
+            DispatchQueue.main.async {
+                self.profiles[peerID] = profile
             }
         }
     }
@@ -133,7 +147,18 @@ extension MCManager: MCSessionDelegate {
 extension MCManager: MCNearbyServiceAdvertiserDelegate {
 
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-        invitationHandler(profile.allowOthersToFindYou, session)
+        guard
+            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let window = windowScene.windows.first
+        else { return }
+        let title = "\(peerID.displayName)"
+        let message = "Would you like to accept the invitation?"
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Yes", style: .default) { _ in
+            invitationHandler(true, self.session)
+        })
+        window.rootViewController?.present(alertController, animated: true)
     }
 
 }
@@ -141,7 +166,7 @@ extension MCManager: MCNearbyServiceAdvertiserDelegate {
 extension MCManager: MCNearbyServiceBrowserDelegate {
 
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        if info?["isAllowed"] == "Yes" {
+        if !foundPeers.contains(peerID) {
             foundPeers.append(peerID)
         }
     }
@@ -155,15 +180,15 @@ extension MCManager: MCNearbyServiceBrowserDelegate {
 
 }
 
-extension UIImage {
-    var base64: String {
-        self.jpegData(compressionQuality: 1)?.base64EncodedString() ?? ""
-    }
-}
-
-extension String {
-    var imageFromBase64: UIImage {
-        let imageData = Data(base64Encoded: self, options: .ignoreUnknownCharacters)
-        return UIImage(data: imageData!)!
-    }
-}
+//extension UIImage {
+//    var base64: String {
+//        self.jpegData(compressionQuality: 1)?.base64EncodedString() ?? ""
+//    }
+//}
+//
+//extension String {
+//    var imageFromBase64: UIImage {
+//        let imageData = Data(base64Encoded: self, options: .ignoreUnknownCharacters)
+//        return UIImage(data: imageData!)!
+//    }
+//}
