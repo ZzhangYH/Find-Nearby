@@ -58,7 +58,7 @@ struct ChatDetail: View {
                     .textFieldStyle(.roundedBorder)
                     .submitLabel(.send)
                     .onSubmit {
-                        send(data: $message.wrappedValue.data(using: .utf8)!)
+                        mc.send($message.wrappedValue.data(using: .utf8)!, with: .message, toPeer: peerID)
                         message = ""
                     }
             }
@@ -68,7 +68,7 @@ struct ChatDetail: View {
         .onChange(of: photoItem) { _ in
             Task {
                 if let photo = try? await photoItem?.loadTransferable(type: Data.self) {
-                    send(data: photo)
+                    mc.send(photo, with: .image, toPeer: peerID)
                 }
             }
         }
@@ -82,20 +82,9 @@ struct ChatDetail: View {
         })
     }
     
-    func send(data: Data) {
-        if mc.connectedPeers.contains(peerID) {
-            do {
-                try mc.session.send(data, toPeers: [peerID], with: .reliable)
-            } catch {
-                print("Error occurred when sending \"\($message.wrappedValue)\"")
-            }
-        }
-    }
-    
     func send(fileURL: URL) {
         if mc.connectedPeers.contains(peerID) {
             mc.session.sendResource(at: fileURL, withName: fileURL.lastPathComponent, toPeer: peerID)
-            send(data: fileURL.lastPathComponent.data(using: .utf8)!)
         }
     }
 }

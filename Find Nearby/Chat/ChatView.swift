@@ -15,24 +15,23 @@ struct ChatView: View {
         NavigationView {
             List {
                 ForEach(mc.connectedPeers, id: \.self) { peerID in
-                    let profile = mc.profiles[peerID] ?? Profile(name: peerID.displayName)
                     NavigationLink {
                         ChatDetail(peerID: peerID)
                             .environmentObject(mc)
-                            .navigationTitle(profile.name)
+                            .navigationTitle(peerID.displayName)
                             .toolbar {
                                 ToolbarItem(placement: .topBarTrailing) {
                                     NavigationLink {
-                                        ChatProfile(peerID: peerID, profile: profile)
+                                        ChatProfile(peerID: peerID)
                                             .environmentObject(mc)
                                     } label: {
                                         Image(systemName: "info.circle")
                                     }
                                 }
                             }
-                            .toolbar(.hidden, for: .tabBar)
                     } label: {
-                        ChatRow(profile: profile)
+                        ChatRow(peerID: peerID)
+                            .environmentObject(mc)
                     }
                 }
                 .onDelete(perform: { indexSet in

@@ -89,43 +89,72 @@ class MCManager: NSObject, ObservableObject {
                        email: defaults.string(forKey: "Email") ?? "default@multipeer.com",
                        isAdvertising: defaults.bool(forKey: "isAdvertising"))
     }
+    
+    enum DataType: Codable {
+        case message
+        case image
+        case file
+        case profile
+    }
+    
+    struct MCData: Codable {
+        var type: DataType
+        var data: Data
+    }
+    
+    func send(_ data: Data, with type: DataType, toPeer peerID: MCPeerID) {
+        if session.connectedPeers.contains(peerID) {
+            do {
+                let encodedData = try JSONEncoder().encode(MCData(type: type, data: data))
+                try session.send(encodedData, toPeers: [peerID], with: .reliable)
+            } catch {
+                print("Error when sending data to \(peerID.displayName)")
+            }
+        }
+    }
 
 }
 
 extension MCManager: MCSessionDelegate {
 
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        switch state {
-            case .connected:
-                print("Connected: \(peerID.displayName)")
-            case .connecting:
-                print("Connecting: \(peerID.displayName)")
-            case .notConnected:
-                print("Not connected: \(peerID.displayName)")
-            @unknown default:
-                print("Unknown state received: \(peerID.displayName)")
-        }
-        
         DispatchQueue.main.async {
             self.connectedPeers = session.connectedPeers
+        }
+        
+        switch state {
+        case .connected:
+            send(profile.data()!, with: .profile, toPeer: peerID)
+            print("Connected: \(peerID.displayName)")
+        case .connecting:
+            print("Connecting: \(peerID.displayName)")
+        case .notConnected:
+            print("Not connected: \(peerID.displayName)")
+        @unknown default:
+            print("Unknown state received: \(peerID.displayName)")
         }
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        if let message = String(data: data, encoding: .utf8) {
-            DispatchQueue.main.async {
-                self.messages[peerID] = message
+        if let decodedData = try? JSONDecoder().decode(MCData.self, from: data) {
+            switch decodedData.type {
+            case .message:
+                DispatchQueue.main.async {
+                    self.messages[peerID] = String(data: decodedData.data, encoding: .utf8)
+                }
+            case .image:
+                DispatchQueue.main.async {
+                    self.images[peerID] = UIImage(data: decodedData.data)
+                }
+            case .file:
+                print("Not implemented")
+            case .profile:
+                DispatchQueue.main.async {
+                    self.profiles[peerID] = try? JSONDecoder().decode(Profile.self, from: decodedData.data)
+                }
             }
-        }
-        if let image = UIImage(data: data) {
-            DispatchQueue.main.async {
-                self.images[peerID] = image
-            }
-        }
-        if let profile = try? JSONDecoder().decode(Profile.self, from: data) {
-            DispatchQueue.main.async {
-                self.profiles[peerID] = profile
-            }
+        } else {
+            print("Error when receiving data from \(peerID.displayName)")
         }
     }
     
@@ -179,16 +208,3 @@ extension MCManager: MCNearbyServiceBrowserDelegate {
     }
 
 }
-
-//extension UIImage {
-//    var base64: String {
-//        self.jpegData(compressionQuality: 1)?.base64EncodedString() ?? ""
-//    }
-//}
-//
-//extension String {
-//    var imageFromBase64: UIImage {
-//        let imageData = Data(base64Encoded: self, options: .ignoreUnknownCharacters)
-//        return UIImage(data: imageData!)!
-//    }
-//}

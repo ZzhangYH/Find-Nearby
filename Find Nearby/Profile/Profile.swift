@@ -17,8 +17,7 @@ struct Profile: Codable, Equatable {
     static let `default` = Profile()
     
     func data() -> Data? {
-        let encoder = JSONEncoder()
-        return try? encoder.encode(self)
+        return try? JSONEncoder().encode(self)
     }
     
     func equals(profile: Profile) -> Bool {

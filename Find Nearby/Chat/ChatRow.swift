@@ -6,18 +6,29 @@
 //
 
 import SwiftUI
+import MultipeerConnectivity
 
 struct ChatRow: View {
-    var profile: Profile
+    @EnvironmentObject var mc: MCManager
+    
+    var peerID: MCPeerID
     
     var body: some View {
         HStack {
-            Image(uiImage: UIImage(data: profile.avatar)!)
-                .resizable()
-                .frame(width: 40, height: 40)
-                .clipShape(Circle())
+            if mc.profiles[peerID] != nil {
+                Image(uiImage: UIImage(data: mc.profiles[peerID]!.avatar)!)
+                    .resizable()
+                    .frame(width: 40, height: 40)
+                    .clipShape(Circle())
+            } else {
+                Image(systemName: "person.crop.circle")
+                    .resizable()
+                    .foregroundColor(.secondary)
+                    .frame(width: 40, height: 40)
+                    .clipShape(Circle())
+            }
             
-            Text(profile.name)
+            Text(peerID.displayName)
             
             Spacer()
         }
@@ -26,6 +37,7 @@ struct ChatRow: View {
 
 struct ChatRow_Previews: PreviewProvider {
     static var previews: some View {
-        ChatRow(profile: Profile.default)
+        ChatRow(peerID: MCPeerID(displayName: "Test"))
+            .environmentObject(MCManager())
     }
 }

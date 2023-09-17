@@ -14,19 +14,28 @@ struct ChatProfile: View {
     @State var showActionSheet = false
     
     var peerID: MCPeerID
-    var profile: Profile
     
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center) {
-                Image(uiImage: UIImage(data: profile.avatar)!)
-                    .resizable()
-                    .frame(width: geometry.size.width * 0.45, height: geometry.size.width * 0.45)
-                    .clipShape(Circle())
-                    .offset(y: geometry.size.width * 0.1)
-                    .padding(.bottom, geometry.size.width * 0.1)
+                if mc.profiles[peerID] != nil {
+                    Image(uiImage: UIImage(data: mc.profiles[peerID]!.avatar)!)
+                        .resizable()
+                        .frame(width: geometry.size.width * 0.45, height: geometry.size.width * 0.45)
+                        .clipShape(Circle())
+                        .offset(y: geometry.size.width * 0.1)
+                        .padding(.bottom, geometry.size.width * 0.1)
+                } else {
+                    Image(systemName: "person.crop.circle")
+                        .resizable()
+                        .foregroundColor(.secondary)
+                        .frame(width: geometry.size.width * 0.45, height: geometry.size.width * 0.45)
+                        .clipShape(Circle())
+                        .offset(y: geometry.size.width * 0.1)
+                        .padding(.bottom, geometry.size.width * 0.1)
+                }
 
-                Text(profile.name)
+                Text(peerID.displayName)
                     .bold()
                     .font(.title)
                     .padding(geometry.size.height * 0.01)
@@ -35,7 +44,7 @@ struct ChatProfile: View {
                     VStack(alignment: .leading) {
                         Text("Email address")
                             .font(.caption)
-                        Text(profile.email)
+                        Text(mc.profiles[peerID]?.email ?? "N/A")
                             .font(.callout)
                             .foregroundColor(.accentColor)
                     }
@@ -51,7 +60,7 @@ struct ChatProfile: View {
                     Text("Disconnect Peer")
                 }
                 .actionSheet(isPresented: $showActionSheet) {
-                    ActionSheet(title: Text("Disconnect the chat session with \(profile.name)?"),
+                    ActionSheet(title: Text("Disconnect the chat session with \(peerID.displayName)?"),
                                 buttons: [
                                     .destructive(Text("Disconnect")) {
                                         mc.session.cancelConnectPeer(peerID)
@@ -59,6 +68,7 @@ struct ChatProfile: View {
                                     .cancel()
                                 ])
                 }
+                .padding()
             }
         }
         .background(Color(UIColor.systemGroupedBackground))
@@ -67,7 +77,7 @@ struct ChatProfile: View {
 
 struct ChatProfile_Previews: PreviewProvider {
     static var previews: some View {
-        ChatProfile(peerID: MCPeerID(displayName: "Test"), profile: Profile(name: "Test"))
+        ChatProfile(peerID: MCPeerID(displayName: "Test"))
             .environmentObject(MCManager())
     }
 }
