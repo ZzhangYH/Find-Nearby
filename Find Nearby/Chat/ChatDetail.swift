@@ -22,15 +22,6 @@ struct ChatDetail: View {
     
     var body: some View {
         VStack {
-            Image(uiImage: UIImage(data: mc.profiles[peerID]?.avatar ?? Profile.default.avatar)!)
-                .resizable()
-                .frame(width: 70, height: 70)
-                .clipShape(Circle())
-                .padding(.bottom, 5)
-            
-            Text(peerID.displayName)
-                .font(.callout)
-            
             Spacer()
             
             Text(mc.messages[peerID] ?? "")
@@ -72,6 +63,7 @@ struct ChatDetail: View {
                     }
             }
         }
+        .padding()
         .photosPicker(isPresented: $showPhotosPicker, selection: $photoItem)
         .onChange(of: photoItem) { _ in
             Task {
@@ -88,7 +80,6 @@ struct ChatDetail: View {
                 print("Error occurred when reading file")
             }
         })
-        .padding()
     }
     
     func send(data: Data) {

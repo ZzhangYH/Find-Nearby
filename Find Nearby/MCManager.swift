@@ -151,8 +151,8 @@ extension MCManager: MCNearbyServiceAdvertiserDelegate {
             let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
             let window = windowScene.windows.first
         else { return }
-        let title = "\(peerID.displayName)"
-        let message = "Would you like to accept the invitation?"
+        let title = "Session Invitation"
+        let message = "\(peerID.displayName) invites you to a chat session, would you like to accept?"
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Yes", style: .default) { _ in

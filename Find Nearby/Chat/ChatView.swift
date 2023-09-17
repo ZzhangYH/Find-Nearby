@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MultipeerConnectivity
 
 struct ChatView: View {
     @EnvironmentObject var mc: MCManager
@@ -13,22 +14,39 @@ struct ChatView: View {
     var body: some View {
         NavigationView {
             List {
-                Section {
-                    ForEach(mc.connectedPeers, id: \.self) { peerID in
-                        NavigationLink {
-                            ChatDetail(peerID: peerID)
-                                .environmentObject(mc)
-                        } label: {
-                            Text(peerID.displayName)
-                        }
+                ForEach(mc.connectedPeers, id: \.self) { peerID in
+                    let profile = mc.profiles[peerID] ?? Profile(name: peerID.displayName)
+                    NavigationLink {
+                        ChatDetail(peerID: peerID)
+                            .environmentObject(mc)
+                            .navigationTitle(profile.name)
+                            .toolbar {
+                                ToolbarItem(placement: .topBarTrailing) {
+                                    NavigationLink {
+                                        ChatProfile(peerID: peerID, profile: profile)
+                                            .environmentObject(mc)
+                                    } label: {
+                                        Image(systemName: "info.circle")
+                                    }
+                                }
+                            }
+                            .toolbar(.hidden, for: .tabBar)
+                    } label: {
+                        ChatRow(profile: profile)
                     }
-                } header: {
-                    Text("\(Image(systemName: "person.crop.circle.badge.checkmark")) ")
-                        .foregroundColor(.accentColor) +
-                    Text("Connected Peers")
                 }
+                .onDelete(perform: { indexSet in
+                    var peers: [MCPeerID] = []
+                    for i in indexSet {
+                        peers.append(mc.connectedPeers[i])
+                    }
+                    for peer in peers {
+                        mc.session.cancelConnectPeer(peer)
+                    }
+                })
             }
-            .navigationTitle("Find Nearby")
+            .listStyle(.inset)
+            .navigationTitle("Connected Peers")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 EditButton()

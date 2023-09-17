@@ -63,3 +63,10 @@ struct PeerGrid: View {
         }
     }
 }
+
+struct PeerGrid_Previews: PreviewProvider {
+    static var previews: some View {
+        PeerGrid(peerID: MCPeerID(displayName: "Test"))
+            .environmentObject(MCManager())
+    }
+}

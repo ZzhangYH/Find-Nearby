@@ -13,17 +13,12 @@ struct ProfileSummary: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center) {
-                Rectangle()
-                    .fill(.tertiary)
-                    .ignoresSafeArea(edges: .top)
-                    .frame(height: geometry.size.height * 0.3)
-
                 Image(uiImage: UIImage(data: profile.avatar)!)
                     .resizable()
                     .frame(width: geometry.size.width * 0.45, height: geometry.size.width * 0.45)
                     .clipShape(Circle())
-                    .offset(y: -geometry.size.width * 0.3)
-                    .padding(.bottom, -geometry.size.width * 0.3)
+                    .offset(y: geometry.size.width * 0.2)
+                    .padding(.bottom, geometry.size.width * 0.2)
 
                 Text(profile.name)
                     .bold()
