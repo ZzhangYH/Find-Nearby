@@ -93,7 +93,6 @@ class MCManager: NSObject, ObservableObject {
     enum DataType: Codable {
         case message
         case image
-        case file
         case profile
     }
     
@@ -110,6 +109,12 @@ class MCManager: NSObject, ObservableObject {
             } catch {
                 print("Error when sending data to \(peerID.displayName)")
             }
+        }
+    }
+    
+    func sendResource(at fileURL: URL, toPeer peerID: MCPeerID) {
+        if session.connectedPeers.contains(peerID) {
+            session.sendResource(at: fileURL, withName: fileURL.lastPathComponent, toPeer: peerID)
         }
     }
 
@@ -146,8 +151,6 @@ extension MCManager: MCSessionDelegate {
                 DispatchQueue.main.async {
                     self.images[peerID] = UIImage(data: decodedData.data)
                 }
-            case .file:
-                print("Not implemented")
             case .profile:
                 DispatchQueue.main.async {
                     self.profiles[peerID] = try? JSONDecoder().decode(Profile.self, from: decodedData.data)

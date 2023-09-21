@@ -7,6 +7,7 @@
 
 import SwiftUI
 import PhotosUI
+import QuickLook
 import MultipeerConnectivity
 
 struct ChatDetail: View {
@@ -30,6 +31,18 @@ struct ChatDetail: View {
                 .resizable()
                 .scaledToFit()
                 .padding()
+                .contextMenu {
+                    Button {
+                        UIPasteboard.general.image = mc.images[peerID]
+                    } label: {
+                        Label("Copy", systemImage: "doc.on.doc")
+                    }
+                    let image = Image(uiImage: mc.images[peerID] ?? UIImage())
+                    ShareLink(item: image,
+                              preview: SharePreview("Chat image", image: image)) {
+                        Label("Share", systemImage: "square.and.arrow.up")
+                    }
+                }
             
             Spacer()
             
@@ -75,17 +88,11 @@ struct ChatDetail: View {
         .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.item], allowsMultipleSelection: false, onCompletion: { (result) in
             do {
                 let fileURL = try result.get()
-                send(fileURL: fileURL.first!)
+                mc.sendResource(at: fileURL.first!, toPeer: peerID)
             } catch {
                 print("Error occurred when reading file")
             }
         })
-    }
-    
-    func send(fileURL: URL) {
-        if mc.connectedPeers.contains(peerID) {
-            mc.session.sendResource(at: fileURL, withName: fileURL.lastPathComponent, toPeer: peerID)
-        }
     }
 }
 
