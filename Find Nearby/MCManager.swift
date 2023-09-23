@@ -25,6 +25,7 @@ class MCManager: NSObject, ObservableObject {
     @Published var messages: [MCPeerID : String] = [:]
     @Published var images: [MCPeerID : UIImage] = [:]
     @Published var profiles: [MCPeerID : Profile] = [:]
+    @Published var files: [MCPeerID : URL] = [:]
     
     override init() {
         profile = Profile.default
@@ -171,7 +172,10 @@ extension MCManager: MCSessionDelegate {
     
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
         print("Finish receiving \"\(resourceName)\" from \(peerID.displayName)")
-        
+        guard let url = localURL else { return }
+        DispatchQueue.main.async {
+            self.files[peerID] = url
+        }
     }
 
 }

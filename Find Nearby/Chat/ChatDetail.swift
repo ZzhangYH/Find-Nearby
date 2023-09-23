@@ -18,6 +18,7 @@ struct ChatDetail: View {
     @State private var showFileImporter = false
     @State private var message = ""
     @State private var photoItem: PhotosPickerItem? = nil
+    @State private var fileURL: URL?
     
     var peerID: MCPeerID
     
@@ -39,10 +40,21 @@ struct ChatDetail: View {
                     }
                     let image = Image(uiImage: mc.images[peerID] ?? UIImage())
                     ShareLink(item: image,
-                              preview: SharePreview("Chat image", image: image)) {
+                              preview: SharePreview("Chat Image Selected", image: image)) {
                         Label("Share", systemImage: "square.and.arrow.up")
                     }
                 }
+            
+            Spacer()
+            
+            if mc.files[peerID] != nil {
+                Button {
+                    fileURL = mc.files[peerID]
+                } label: {
+                    Text(mc.files[peerID]!.lastPathComponent)
+                }
+                .quickLookPreview($fileURL)
+            }
             
             Spacer()
             
@@ -85,14 +97,14 @@ struct ChatDetail: View {
                 }
             }
         }
-        .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.item], allowsMultipleSelection: false, onCompletion: { (result) in
+        .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.item]) { result in
             do {
                 let fileURL = try result.get()
-                mc.sendResource(at: fileURL.first!, toPeer: peerID)
+                mc.sendResource(at: fileURL, toPeer: peerID)
             } catch {
                 print("Error occurred when reading file")
             }
-        })
+        }
     }
 }
 
