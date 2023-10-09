@@ -28,6 +28,18 @@ struct ChatDetail: View {
             
             Text(mc.messages[peerID] ?? "")
             
+            if mc.mStatus[peerID] != nil {
+                HStack {
+                    Spacer()
+                    Text(mc.mStatus[peerID]! ? "Received" : "Sent")
+                        .foregroundColor(Color(mc.mStatus[peerID]! ? UIColor.systemBlue : UIColor.systemGreen))
+                        .font(.caption)
+                    .padding(.horizontal)
+                }
+            }
+            
+            Spacer()
+            
             Image(uiImage: mc.images[peerID] ?? UIImage())
                 .resizable()
                 .scaledToFit()
@@ -44,6 +56,16 @@ struct ChatDetail: View {
                         Label("Share", systemImage: "square.and.arrow.up")
                     }
                 }
+            
+            if mc.iStatus[peerID] != nil {
+                HStack {
+                    Spacer()
+                    Text(mc.iStatus[peerID]! ? "Received" : "Sent")
+                        .foregroundColor(Color(mc.iStatus[peerID]! ? UIColor.systemBlue : UIColor.systemGreen))
+                        .font(.caption)
+                    .padding(.horizontal)
+                }
+            }
             
             Spacer()
             
@@ -84,6 +106,8 @@ struct ChatDetail: View {
                     .submitLabel(.send)
                     .onSubmit {
                         mc.send($message.wrappedValue.data(using: .utf8)!, with: .message, toPeer: peerID)
+                        mc.messages[peerID] = message
+                        mc.mStatus[peerID] = false
                         message = ""
                     }
             }
@@ -94,6 +118,8 @@ struct ChatDetail: View {
             Task {
                 if let photo = try? await photoItem?.loadTransferable(type: Data.self) {
                     mc.send(photo, with: .image, toPeer: peerID)
+                    mc.images[peerID] = UIImage(data: photo)
+                    mc.iStatus[peerID] = false
                 }
             }
         }

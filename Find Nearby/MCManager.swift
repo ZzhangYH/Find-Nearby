@@ -23,7 +23,9 @@ class MCManager: NSObject, ObservableObject {
     @Published var foundPeers: [MCPeerID] = []
     @Published var connectedPeers: [MCPeerID] = []
     @Published var messages: [MCPeerID : String] = [:]
+    @Published var mStatus: [MCPeerID : Bool] = [:]
     @Published var images: [MCPeerID : UIImage] = [:]
+    @Published var iStatus: [MCPeerID : Bool] = [:]
     @Published var profiles: [MCPeerID : Profile] = [:]
     @Published var files: [MCPeerID : URL] = [:]
     
@@ -147,10 +149,12 @@ extension MCManager: MCSessionDelegate {
             case .message:
                 DispatchQueue.main.async {
                     self.messages[peerID] = String(data: decodedData.data, encoding: .utf8)
+                    self.mStatus[peerID] = true
                 }
             case .image:
                 DispatchQueue.main.async {
                     self.images[peerID] = UIImage(data: decodedData.data)
+                    self.iStatus[peerID] = true
                 }
             case .profile:
                 DispatchQueue.main.async {
