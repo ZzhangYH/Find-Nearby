@@ -18,10 +18,9 @@ struct PeerGrid: View {
     
     var body: some View {
         ZStack {
-            Rectangle()
+            RoundedRectangle(cornerRadius: 20)
                 .fill(Color(UIColor.systemGray5))
                 .frame(width: 140, height: 180)
-                .cornerRadius(20)
             
             VStack(alignment: .center) {
                 ZStack {

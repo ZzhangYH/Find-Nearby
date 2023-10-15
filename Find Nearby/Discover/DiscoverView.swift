@@ -10,49 +10,30 @@ import SwiftUI
 struct DiscoverView: View {
     @EnvironmentObject var mc: MCManager
     
-    @State private var showInvitations = false
     @State private var isBrowsing = true
     
     var body: some View {
         NavigationView {
-            ScrollView {
+            VStack {
+                Toggle("Browsing nearby devices", isOn: $mc.isBrowsing)
+                    .foregroundColor(.secondary)
+                    .padding(.horizontal)
+                
                 GeometryReader { geometry in
-                    let count = mc.foundPeers.count
-                    let numOfHS = Int(ceil(Double(count) / 2))
-                    
-                    VStack {
-                        Toggle("Browsing nearby devices", isOn: $mc.isBrowsing)
-                            .foregroundColor(.secondary)
-                            .padding(.horizontal)
-                        
-                        ForEach(0...numOfHS, id: \.self) { num in
-                            let index = num * 2
-
-                            HStack {
-                                Spacer()
-
-                                if index < count {
-                                    PeerGrid(peerID: mc.foundPeers[index])
-                                        .environmentObject(mc)
-                                        .scaleEffect(geometry.size.width / 393)
-                                        .padding(.horizontal, geometry.size.width * 0.01)
-                                }
-                                if index + 1 < count {
-                                    PeerGrid(peerID: mc.foundPeers[index + 1])
-                                        .environmentObject(mc)
-                                        .scaleEffect(geometry.size.width / 393)
-                                        .padding(.horizontal, geometry.size.width * 0.01)
-                                }
-
-                                Spacer()
+                    ScrollView {
+                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
+                            ForEach(mc.foundPeers, id: \.self) { peerID in
+                                PeerGrid(peerID: peerID)
+                                    .environmentObject(mc)
+                                    .scaleEffect(geometry.size.width / 393)
                             }
-                            .padding(.vertical, geometry.size.height * 0.01)
                         }
+                        .padding()
                     }
                 }
-                .padding()
-                .navigationTitle("Find Nearby")
             }
+            .padding()
+            .navigationTitle("Find Nearby")
         }
     }
 }
