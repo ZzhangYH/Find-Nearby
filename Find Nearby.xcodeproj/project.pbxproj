@@ -338,7 +338,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Find-Nearby-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Find Nearby";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save chat images to your Photo Library";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save chat images to your library";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Select images from your library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -370,7 +371,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Find-Nearby-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Find Nearby";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save chat images to your Photo Library";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save chat images to your library";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Select images from your library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
