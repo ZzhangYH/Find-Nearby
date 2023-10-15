@@ -32,20 +32,8 @@ struct ProfileEditor: View {
                     }
                 
                 List {
-                    VStack(alignment: .listRowSeparatorLeading) {
-                        Text("Name").font(.subheadline).bold()
-                        TextField("Name", text: $profile.name)
-                            .multilineTextAlignment(.center)
-                            .padding()
-                    }
-                    
-                    VStack(alignment: .listRowSeparatorLeading) {
-                        Text("Email address").font(.subheadline).bold()
-                        TextField("Email address", text: $profile.email)
-                            .multilineTextAlignment(.center)
-                            .padding()
-                    }
-                    
+                    ProfileEditorRow(name: "Name", element: $profile.name)
+                    ProfileEditorRow(name: "Email address", element: $profile.email)
                     Toggle(isOn: $profile.isAdvertising) {
                         Text("Allow others to find you?").font(.subheadline).bold()
                     }
@@ -62,6 +50,20 @@ struct ProfileEditor: View {
                     }
                 }
             }
+        }
+    }
+}
+
+struct ProfileEditorRow: View {
+    var name: String
+    @Binding var element: String
+    
+    var body: some View {
+        VStack(alignment: .listRowSeparatorLeading) {
+            Text(name).font(.subheadline).bold()
+            TextField(name, text: $element)
+                .multilineTextAlignment(.center)
+                .padding()
         }
     }
 }

@@ -21,32 +21,30 @@ struct ProfileSummary: View {
                     .padding(.bottom, geometry.size.width * 0.2)
 
                 Text(profile.name)
-                    .bold()
-                    .font(.title)
+                    .font(.title).bold()
                     .padding(geometry.size.height * 0.01)
 
                 List {
-                    VStack(alignment: .leading) {
-                        Text("Email address")
-                            .font(.caption)
-                        Text(profile.email)
-                            .font(.callout)
-                            .foregroundColor(.accentColor)
-                    }
-                    .padding(.vertical, geometry.size.height * 0.005)
-                    
-                    VStack(alignment: .leading) {
-                        Text("Allow others to find you?")
-                            .font(.caption)
-                        Text(profile.isAdvertising ? "Yes" : "No")
-                            .font(.callout)
-                            .foregroundColor(.accentColor)
-                    }
-                    .padding(.vertical, geometry.size.height * 0.005)
+                    ProfileRow(name: "Email address", element: profile.email)
+                    ProfileRow(name: "Allow others to find you?", element: profile.isAdvertising ? "Yes": "No")
                 }
-                .padding(.horizontal)
                 .listStyle(.plain)
+                .padding(.horizontal)
             }
+        }
+    }
+}
+
+struct ProfileRow: View {
+    var name: String
+    var element: String
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(name).font(.caption)
+            Text(element).font(.callout)
+                .foregroundColor(.accentColor)
+                .padding(.leastNormalMagnitude)
         }
     }
 }

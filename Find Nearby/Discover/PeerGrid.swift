@@ -55,9 +55,9 @@ struct PeerGrid: View {
                 .frame(width: 85, height: 85)
                 
                 Text(peerID.displayName)
+                    .frame(width: 105, height: 45)
                     .multilineTextAlignment(.center)
                     .lineLimit(2)
-                    .frame(width: 105, height: 45)
             }
         }
     }

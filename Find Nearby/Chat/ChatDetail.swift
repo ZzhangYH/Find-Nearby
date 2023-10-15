@@ -27,15 +27,8 @@ struct ChatDetail: View {
             Spacer()
             
             Text(mc.messages[peerID] ?? "")
-            
             if mc.mStatus[peerID] != nil {
-                HStack {
-                    Spacer()
-                    Text(mc.mStatus[peerID]! ? "Received" : "Sent")
-                        .foregroundColor(Color(mc.mStatus[peerID]! ? UIColor.systemBlue : UIColor.systemGreen))
-                        .font(.caption)
-                    .padding(.horizontal)
-                }
+                ChatElementStatus(status: mc.mStatus[peerID]!)
             }
             
             Spacer()
@@ -56,15 +49,8 @@ struct ChatDetail: View {
                         Label("Share", systemImage: "square.and.arrow.up")
                     }
                 }
-            
             if mc.iStatus[peerID] != nil {
-                HStack {
-                    Spacer()
-                    Text(mc.iStatus[peerID]! ? "Received" : "Sent")
-                        .foregroundColor(Color(mc.iStatus[peerID]! ? UIColor.systemBlue : UIColor.systemGreen))
-                        .font(.caption)
-                    .padding(.horizontal)
-                }
+                ChatElementStatus(status: mc.iStatus[peerID]!)
             }
             
             Spacer()
@@ -130,6 +116,21 @@ struct ChatDetail: View {
             } catch {
                 print("Error occurred when reading file")
             }
+        }
+    }
+}
+
+struct ChatElementStatus: View {
+    var status: Bool
+    
+    var body: some View {
+        HStack {
+            Spacer()
+            
+            Text(status ? "Received" : "Sent")
+                .foregroundColor(Color(status ? UIColor.systemBlue : UIColor.systemGreen))
+                .font(.caption)
+                .padding(.horizontal)
         }
     }
 }

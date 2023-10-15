@@ -10,7 +10,6 @@ import MultipeerConnectivity
 
 struct ChatProfile: View {
     @EnvironmentObject var mc: MCManager
-    
     @State var showActionSheet = false
     
     var peerID: MCPeerID
@@ -36,19 +35,11 @@ struct ChatProfile: View {
                 }
 
                 Text(peerID.displayName)
-                    .bold()
-                    .font(.title)
+                    .font(.title).bold()
                     .padding(geometry.size.height * 0.01)
 
                 List {
-                    VStack(alignment: .leading) {
-                        Text("Email address")
-                            .font(.caption)
-                        Text(mc.profiles[peerID]?.email ?? "N/A")
-                            .font(.callout)
-                            .foregroundColor(.accentColor)
-                    }
-                    .padding(.vertical, geometry.size.height * 0.005)
+                    ProfileRow(name: "Email address", element: mc.profiles[peerID]?.email ?? "N/A")
                 }
                 .padding(.horizontal)
                 

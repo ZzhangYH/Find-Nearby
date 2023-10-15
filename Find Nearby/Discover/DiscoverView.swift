@@ -9,13 +9,13 @@ import SwiftUI
 
 struct DiscoverView: View {
     @EnvironmentObject var mc: MCManager
-    
     @State private var isBrowsing = true
     
     var body: some View {
         NavigationView {
             VStack {
                 DiscoverController(isBrowsing: mc.isBrowsing)
+                    .environmentObject(mc)
                 
                 GeometryReader { geometry in
                     ScrollView {
@@ -33,6 +33,31 @@ struct DiscoverView: View {
             .padding()
             .navigationTitle("Find Nearby")
         }
+    }
+}
+
+struct DiscoverController: View {
+    @EnvironmentObject var mc: MCManager
+    @State var isBrowsing: Bool
+    
+    var body: some View {
+        let toggleBinding = Binding {
+            mc.isBrowsing
+        } set: {
+            mc.isBrowsing = $0
+            self.isBrowsing = $0
+        }
+        HStack {
+            Text("Browsing nearby devices  ").foregroundColor(.secondary)
+            if isBrowsing && mc.profile.isAdvertising {
+                ProgressView()
+            }
+            
+            Spacer()
+            
+            Toggle("Browsing nearby devices", isOn: toggleBinding).labelsHidden()
+        }
+        .padding(.horizontal)
     }
 }
 
