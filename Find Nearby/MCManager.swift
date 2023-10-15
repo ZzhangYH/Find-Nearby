@@ -65,6 +65,7 @@ class MCManager: NSObject, ObservableObject {
         if profile.isAdvertising {
             serviceAdvertiser.startAdvertisingPeer()
         }
+        isBrowsing = defaults.bool(forKey: "isBrowsing")
     }
     
     var isBrowsing = false {
@@ -74,6 +75,7 @@ class MCManager: NSObject, ObservableObject {
             } else {
                 serviceBrowser.stopBrowsingForPeers()
             }
+            defaults.set(isBrowsing, forKey: "isBrowsing")
         }
     }
     
