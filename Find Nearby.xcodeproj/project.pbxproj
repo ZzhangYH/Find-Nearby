@@ -30,7 +30,6 @@
 		B31B30CD2AB48E87007B3239 /* ChatProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatProfile.swift; sourceTree = "<group>"; };
 		B33B14B12A7A4749001AF21C /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
 		B34266AE2A80C4E000A8A0A5 /* MCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCManager.swift; sourceTree = "<group>"; };
-		B35EC3A52A83C0D000084C15 /* Find-Nearby-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Find-Nearby-Info.plist"; sourceTree = SOURCE_ROOT; };
 		B366850F2A8B60BB00B600C9 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B36685132A8B6BD700B600C9 /* ProfileEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditor.swift; sourceTree = "<group>"; };
 		B39B5F1F2A935E050043F031 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
@@ -108,7 +107,6 @@
 		B39C70312A78E01600F4FCF7 /* Find Nearby */ = {
 			isa = PBXGroup;
 			children = (
-				B35EC3A52A83C0D000084C15 /* Find-Nearby-Info.plist */,
 				B39C70322A78E01600F4FCF7 /* Find_NearbyApp.swift */,
 				B39C70342A78E01600F4FCF7 /* ContentView.swift */,
 				B34266AE2A80C4E000A8A0A5 /* MCManager.swift */,
