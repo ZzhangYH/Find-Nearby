@@ -71,7 +71,7 @@ struct ChatDetail: View {
                     showActionSheet = true
                 } label: {
                     Image(systemName: "plus.circle.fill")
-                        .foregroundColor(.gray)
+                        .foregroundColor(.secondary)
                         .font(.title2)
                 }
                 .actionSheet(isPresented: $showActionSheet) {
