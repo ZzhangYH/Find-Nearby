@@ -55,16 +55,16 @@ class MCManager: NSObject, ObservableObject {
         profile = readFromDefaults()
         peerID = MCPeerID(displayName: profile.name)
         session = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
-        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: serviceType)
+        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID,
+                                                      discoveryInfo: ["show": profile.isAdvertising ? "Yes" : "No"],
+                                                      serviceType: serviceType)
         serviceBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
         
         session.delegate = self
         serviceAdvertiser.delegate = self
         serviceBrowser.delegate = self
         
-        if profile.isAdvertising {
-            serviceAdvertiser.startAdvertisingPeer()
-        }
+        serviceAdvertiser.startAdvertisingPeer()
         isBrowsing = defaults.bool(forKey: "isBrowsing")
     }
     
@@ -208,7 +208,7 @@ extension MCManager: MCNearbyServiceAdvertiserDelegate {
 extension MCManager: MCNearbyServiceBrowserDelegate {
 
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        if !foundPeers.contains(peerID) {
+        if !foundPeers.contains(peerID) && info?["show"] == "Yes" {
             foundPeers.append(peerID)
         }
     }
