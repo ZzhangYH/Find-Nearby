@@ -40,6 +40,9 @@ struct ContentView: View {
                 }
                 .tag(Tab.profile)
         }
+        .onAppear() {
+            UITabBar.appearance().backgroundColor = .systemGroupedBackground
+        }
     }
 }
 
