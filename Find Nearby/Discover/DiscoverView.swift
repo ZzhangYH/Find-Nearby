@@ -15,9 +15,7 @@ struct DiscoverView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Toggle("Browsing nearby devices", isOn: $mc.isBrowsing)
-                    .foregroundColor(.secondary)
-                    .padding(.horizontal)
+                DiscoverController(isBrowsing: mc.isBrowsing)
                 
                 GeometryReader { geometry in
                     ScrollView {

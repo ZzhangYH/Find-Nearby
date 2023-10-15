@@ -22,6 +22,7 @@
 		B39C70432A78E2CD00F4FCF7 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39C70422A78E2CD00F4FCF7 /* Profile.swift */; };
 		B39C70452A78E58500F4FCF7 /* PeerGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39C70442A78E58500F4FCF7 /* PeerGrid.swift */; };
 		B39C70492A78F0E900F4FCF7 /* ProfileSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39C70482A78F0E900F4FCF7 /* ProfileSummary.swift */; };
+		B3D6CFFE2ADBC2910080F810 /* DiscoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D6CFFD2ADBC2910080F810 /* DiscoverController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		B39C70422A78E2CD00F4FCF7 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		B39C70442A78E58500F4FCF7 /* PeerGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerGrid.swift; sourceTree = "<group>"; };
 		B39C70482A78F0E900F4FCF7 /* ProfileSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSummary.swift; sourceTree = "<group>"; };
+		B3D6CFFD2ADBC2910080F810 /* DiscoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				B33B14B12A7A4749001AF21C /* DiscoverView.swift */,
+				B3D6CFFD2ADBC2910080F810 /* DiscoverController.swift */,
 				B39C70442A78E58500F4FCF7 /* PeerGrid.swift */,
 			);
 			path = Discover;
@@ -204,6 +207,7 @@
 				B34266AF2A80C4E000A8A0A5 /* MCManager.swift in Sources */,
 				B39B5F202A935E050043F031 /* ChatView.swift in Sources */,
 				B39C70332A78E01600F4FCF7 /* Find_NearbyApp.swift in Sources */,
+				B3D6CFFE2ADBC2910080F810 /* DiscoverController.swift in Sources */,
 				B39C70452A78E58500F4FCF7 /* PeerGrid.swift in Sources */,
 				B33B14B22A7A4749001AF21C /* DiscoverView.swift in Sources */,
 				B31B30CE2AB48E87007B3239 /* ChatProfile.swift in Sources */,
