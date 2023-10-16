@@ -22,6 +22,7 @@
 		B39C70452A78E58500F4FCF7 /* PeerGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39C70442A78E58500F4FCF7 /* PeerGrid.swift */; };
 		B39C70492A78F0E900F4FCF7 /* ProfileSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39C70482A78F0E900F4FCF7 /* ProfileSummary.swift */; };
 		B3A291662ADD16F900359E66 /* ChatList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A291652ADD16F900359E66 /* ChatList.swift */; };
+		B3A291682ADD571500359E66 /* DiscoverStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A291672ADD571500359E66 /* DiscoverStatus.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		B39C70442A78E58500F4FCF7 /* PeerGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerGrid.swift; sourceTree = "<group>"; };
 		B39C70482A78F0E900F4FCF7 /* ProfileSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSummary.swift; sourceTree = "<group>"; };
 		B3A291652ADD16F900359E66 /* ChatList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatList.swift; sourceTree = "<group>"; };
+		B3A291672ADD571500359E66 /* DiscoverStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverStatus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				B33B14B12A7A4749001AF21C /* DiscoverView.swift */,
+				B3A291672ADD571500359E66 /* DiscoverStatus.swift */,
 				B39C70442A78E58500F4FCF7 /* PeerGrid.swift */,
 			);
 			path = Discover;
@@ -204,6 +207,7 @@
 				B39C70332A78E01600F4FCF7 /* Find_NearbyApp.swift in Sources */,
 				B39C70452A78E58500F4FCF7 /* PeerGrid.swift in Sources */,
 				B33B14B22A7A4749001AF21C /* DiscoverView.swift in Sources */,
+				B3A291682ADD571500359E66 /* DiscoverStatus.swift in Sources */,
 				B31B30CE2AB48E87007B3239 /* ChatProfile.swift in Sources */,
 				B39B5F232A9364FF0043F031 /* ChatDetail.swift in Sources */,
 				B36685102A8B60BB00B600C9 /* ProfileView.swift in Sources */,

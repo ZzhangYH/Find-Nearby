@@ -10,6 +10,7 @@ import SwiftUI
 struct DiscoverView: View {
     @EnvironmentObject var mc: MCManager
     @State private var isBrowsing = true
+    @State private var showSheet = false
     
     var body: some View {
         NavigationView {
@@ -29,6 +30,11 @@ struct DiscoverView: View {
                         .padding()
                     }
                 }
+                
+                Divider()
+                
+                DiscoverStatus()
+                    .environmentObject(mc)
             }
             .padding()
             .navigationTitle("Find Nearby")

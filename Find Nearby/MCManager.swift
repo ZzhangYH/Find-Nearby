@@ -22,6 +22,7 @@ class MCManager: NSObject, ObservableObject {
     
     @Published var foundPeers: [MCPeerID] = []
     @Published var connectedPeers: [MCPeerID] = []
+    @Published var notConnectedPeers: [MCPeerID] = []
     @Published var messages: [MCPeerID : String] = [:]
     @Published var mStatus: [MCPeerID : Bool] = [:]
     @Published var images: [MCPeerID : UIImage] = [:]
@@ -51,6 +52,7 @@ class MCManager: NSObject, ObservableObject {
         
         foundPeers.removeAll()
         connectedPeers.removeAll()
+        notConnectedPeers.removeAll()
         
         profile = readFromDefaults()
         peerID = MCPeerID(displayName: profile.name)
@@ -134,11 +136,30 @@ extension MCManager: MCSessionDelegate {
         
         switch state {
         case .connected:
+            // Exchange profiles
             send(profile.data()!, with: .profile, toPeer: peerID)
+            // Remove from notConnectedPeers
+            if self.notConnectedPeers.contains(peerID) {
+                DispatchQueue.main.async {
+                    self.notConnectedPeers.removeAll(where: { $0.isEqual(peerID) })
+                }
+            }
+            // Remove from foundPeers
+            if self.foundPeers.contains(peerID) {
+                DispatchQueue.main.async {
+                    self.foundPeers.removeAll(where: { $0.isEqual(peerID) })
+                }
+            }
             print("Connected: \(peerID.displayName)")
         case .connecting:
             print("Connecting: \(peerID.displayName)")
         case .notConnected:
+            // Add to notConnectedPeers
+            if !self.notConnectedPeers.contains(peerID) {
+                DispatchQueue.main.async {
+                    self.notConnectedPeers.append(peerID)
+                }
+            }
             print("Not connected: \(peerID.displayName)")
         @unknown default:
             print("Unknown state received: \(peerID.displayName)")
@@ -215,8 +236,7 @@ extension MCManager: MCNearbyServiceBrowserDelegate {
     
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
         if foundPeers.contains(peerID) {
-            guard let index = foundPeers.firstIndex(of: peerID) else { return }
-            foundPeers.remove(at: index)
+            foundPeers.removeAll(where: { $0.isEqual(peerID) })
         }
     }
 
