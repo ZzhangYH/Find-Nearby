@@ -6,77 +6,55 @@
 //
 
 import SwiftUI
-import MultipeerConnectivity
 
 struct ChatView: View {
     @EnvironmentObject var mc: MCManager
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(mc.connectedPeers, id: \.self) { peerID in
-                    NavigationLink {
-                        ChatDetail(peerID: peerID)
-                            .environmentObject(mc)
-                            .navigationTitle(peerID.displayName)
-                            .toolbar {
-                                ToolbarItem(placement: .topBarTrailing) {
-                                    NavigationLink {
-                                        ChatProfile(peerID: peerID)
-                                            .environmentObject(mc)
-                                    } label: {
-                                        Image(systemName: "info.circle")
-                                    }
-                                }
-                            }
-                    } label: {
-                        ChatRow(peerID: peerID)
-                            .environmentObject(mc)
-                    }
+            VStack {
+                if mc.connectedPeers.isEmpty {
+                    EmptyChatNotice()
+                } else {
+                    ChatList()
+                        .environmentObject(mc)
                 }
-                .onDelete(perform: { indexSet in
-                    var peers: [MCPeerID] = []
-                    for i in indexSet {
-                        peers.append(mc.connectedPeers[i])
-                    }
-                    for peer in peers {
-                        mc.session.cancelConnectPeer(peer)
-                    }
-                })
             }
-            .listStyle(.inset)
-            .navigationTitle("Connected Peers")
+            .navigationTitle("Chat Sessions")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                EditButton()
+                if !mc.connectedPeers.isEmpty {
+                    EditButton()
+                }
             }
+            .toolbarBackground(.visible, for: .navigationBar)
         }
     }
 }
 
-struct ChatRow: View {
-    @EnvironmentObject var mc: MCManager
-    var peerID: MCPeerID
-    
+struct EmptyChatNotice: View {
     var body: some View {
-        HStack {
-            if mc.profiles[peerID] != nil {
-                Image(uiImage: UIImage(data: mc.profiles[peerID]!.avatar)!)
-                    .resizable()
-                    .frame(width: 40, height: 40)
-                    .clipShape(Circle())
-            } else {
-                Image(systemName: "person.crop.circle")
-                    .resizable()
-                    .foregroundColor(.secondary)
-                    .frame(width: 40, height: 40)
-                    .clipShape(Circle())
-            }
-            
-            Text(peerID.displayName)
-            
-            Spacer()
+        VStack {
+            Image(systemName: "person.fill.questionmark")
+                .font(.system(size: 80))
+                .foregroundColor(.accentColor)
+            Text("No active chats")
+                .font(.largeTitle).bold()
+                .padding(.leastNormalMagnitude)
         }
+        .padding()
+        
+        VStack(alignment: .listRowSeparatorLeading, spacing: 10) {
+            Text("Go to ") +
+            Text("\(Image(systemName: "wifi.circle"))Discover ").foregroundColor(.accentColor) +
+            Text("page and invite nearby peers to your chat session!")
+            
+            Text("Or you can check your settings and see if you are allowing others to find you under ") +
+            Text("\(Image(systemName: "person.circle"))Profile ").foregroundColor(.accentColor) +
+            Text("page for nearby peers to send invitations.")
+        }
+        .font(.caption)
+        .padding(.horizontal, 36)
     }
 }
 
