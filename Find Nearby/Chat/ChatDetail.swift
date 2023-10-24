@@ -12,12 +12,6 @@ import MultipeerConnectivity
 
 struct ChatDetail: View {
     @EnvironmentObject var mc: MCManager
-    
-    @State private var showActionSheet = false
-    @State private var showPhotosPicker = false
-    @State private var showFileImporter = false
-    @State private var message = ""
-    @State private var photoItem: PhotosPickerItem? = nil
     @State private var fileURL: URL?
     
     var peerID: MCPeerID
@@ -69,39 +63,70 @@ struct ChatDetail: View {
             
             Spacer()
             
-            HStack {
-                Button {
-                    showActionSheet = true
-                } label: {
-                    Image(systemName: "plus.circle.fill")
-                        .foregroundColor(.secondary)
-                        .font(.title2)
-                }
-                .actionSheet(isPresented: $showActionSheet) {
-                    ActionSheet(title: Text("Choose photo or file from"),
-                                buttons: [
-                                    .default(Text("Photo Library")) {
-                                        showPhotosPicker = true
-                                    },
-                                    .default(Text("Files")) {
-                                        showFileImporter = true
-                                    },
-                                    .cancel()
-                                ])
-                }
-                
-                TextField("Text message", text: $message)
-                    .textFieldStyle(.roundedBorder)
-                    .submitLabel(.send)
-                    .onSubmit {
-                        mc.send($message.wrappedValue.data(using: .utf8)!, with: .message, toPeer: peerID)
-                        mc.messages[peerID] = message
-                        mc.mStatus[peerID] = false
-                        message = ""
-                    }
-            }
+            ChatInputController(peerID: peerID)
+                .environmentObject(mc)
         }
         .padding()
+    }
+}
+
+struct ChatElementStatus: View {
+    var status: Bool
+    
+    var body: some View {
+        HStack {
+            Spacer()
+            
+            Text(status ? "Received" : "Sent")
+                .foregroundColor(Color(status ? UIColor.systemBlue : UIColor.systemGreen))
+                .font(.caption)
+                .padding(.horizontal)
+        }
+    }
+}
+
+struct ChatInputController: View {
+    @EnvironmentObject var mc: MCManager
+    @State private var showActionSheet = false
+    @State private var showPhotosPicker = false
+    @State private var showFileImporter = false
+    @State private var message = ""
+    @State private var photoItem: PhotosPickerItem? = nil
+    
+    var peerID: MCPeerID
+    
+    var body: some View {
+        HStack {
+            Button {
+                showActionSheet = true
+            } label: {
+                Image(systemName: "plus.circle.fill")
+                    .foregroundColor(.secondary)
+                    .font(.title2)
+            }
+            .actionSheet(isPresented: $showActionSheet) {
+                ActionSheet(title: Text("Choose photo or file from"),
+                            buttons: [
+                                .default(Text("Photo Library")) {
+                                    showPhotosPicker = true
+                                },
+                                .default(Text("Files")) {
+                                    showFileImporter = true
+                                },
+                                .cancel()
+                            ])
+            }
+            
+            TextField("Text message", text: $message)
+                .textFieldStyle(.roundedBorder)
+                .submitLabel(.send)
+                .onSubmit {
+                    mc.send($message.wrappedValue.data(using: .utf8)!, with: .message, toPeer: peerID)
+                    mc.messages[peerID] = message
+                    mc.mStatus[peerID] = false
+                    message = ""
+                }
+        }
         .photosPicker(isPresented: $showPhotosPicker, selection: $photoItem)
         .onChange(of: photoItem) { _ in
             Task {
@@ -123,21 +148,6 @@ struct ChatDetail: View {
             } catch {
                 print("Error occurred when reading file")
             }
-        }
-    }
-}
-
-struct ChatElementStatus: View {
-    var status: Bool
-    
-    var body: some View {
-        HStack {
-            Spacer()
-            
-            Text(status ? "Received" : "Sent")
-                .foregroundColor(Color(status ? UIColor.systemBlue : UIColor.systemGreen))
-                .font(.caption)
-                .padding(.horizontal)
         }
     }
 }
