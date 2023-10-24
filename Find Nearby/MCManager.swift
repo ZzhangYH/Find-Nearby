@@ -23,12 +23,13 @@ class MCManager: NSObject, ObservableObject {
     @Published var foundPeers: [MCPeerID] = []
     @Published var connectedPeers: [MCPeerID] = []
     @Published var notConnectedPeers: [MCPeerID] = []
-    @Published var messages: [MCPeerID : String] = [:]
-    @Published var mStatus: [MCPeerID : Bool] = [:]
-    @Published var images: [MCPeerID : UIImage] = [:]
-    @Published var iStatus: [MCPeerID : Bool] = [:]
     @Published var profiles: [MCPeerID : Profile] = [:]
+    @Published var messages: [MCPeerID : String] = [:]
+    @Published var images: [MCPeerID : UIImage] = [:]
     @Published var files: [MCPeerID : URL] = [:]
+    @Published var mStatus: [MCPeerID : Bool] = [:]
+    @Published var iStatus: [MCPeerID : Bool] = [:]
+    @Published var fStatus: [MCPeerID : Bool] = [:]
     
     override init() {
         profile = Profile.default
@@ -199,9 +200,16 @@ extension MCManager: MCSessionDelegate {
     
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
         print("Finish receiving \"\(resourceName)\" from \(peerID.displayName)")
-        guard let url = localURL else { return }
+        guard let tmpURL = localURL else { return }
+        guard let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent(resourceName) else { return }
+        do {
+            try FileManager.default.copyItem(at: tmpURL, to: documentURL)
+        } catch {
+            print("Failed to copy item to documentURL")
+        }
         DispatchQueue.main.async {
-            self.files[peerID] = url
+            self.files[peerID] = documentURL
+            self.fStatus[peerID] = true
         }
     }
 

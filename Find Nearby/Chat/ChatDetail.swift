@@ -63,6 +63,9 @@ struct ChatDetail: View {
                 }
                 .quickLookPreview($fileURL)
             }
+            if mc.fStatus[peerID] != nil {
+                ChatElementStatus(status: mc.fStatus[peerID]!)
+            }
             
             Spacer()
             
@@ -112,7 +115,11 @@ struct ChatDetail: View {
         .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.item]) { result in
             do {
                 let fileURL = try result.get()
-                mc.sendResource(at: fileURL, toPeer: peerID)
+                if fileURL.startAccessingSecurityScopedResource() == true {
+                    mc.sendResource(at: fileURL, toPeer: peerID)
+                    mc.files[peerID] = fileURL
+                    mc.fStatus[peerID] = false
+                }
             } catch {
                 print("Error occurred when reading file")
             }
