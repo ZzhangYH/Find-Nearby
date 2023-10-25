@@ -7,7 +7,6 @@
 
 import SwiftUI
 import PhotosUI
-import QuickLook
 import MultipeerConnectivity
 
 struct ChatDetail: View {
@@ -66,6 +65,7 @@ struct ChatDetail: View {
             ChatInputController(peerID: peerID)
                 .environmentObject(mc)
         }
+        .toolbarBackground(.visible, for: .navigationBar)
         .padding()
     }
 }

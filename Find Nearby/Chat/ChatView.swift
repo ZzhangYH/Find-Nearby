@@ -6,9 +6,13 @@
 //
 
 import SwiftUI
+import QuickLook
 
 struct ChatView: View {
     @EnvironmentObject var mc: MCManager
+    
+    @State var editMode: EditMode = .inactive
+    @State var showSheet = false
     
     var body: some View {
         NavigationView {
@@ -20,15 +24,55 @@ struct ChatView: View {
                         .environmentObject(mc)
                 }
             }
+            .environment(\.editMode, $editMode)
             .navigationTitle("Chat Sessions")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                if !mc.connectedPeers.isEmpty {
-                    EditButton()
+                ToolbarItem(placement: .cancellationAction) {
+                    if !mc.connectedPeers.isEmpty && editMode == .active {
+                        Button("Cancel", role: .cancel) {
+                            withAnimation {
+                                editMode = .inactive
+                            }
+                        }
+                    }
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    if !mc.connectedPeers.isEmpty && editMode == .inactive {
+                        menuButton
+                    }
                 }
             }
             .toolbarBackground(.visible, for: .navigationBar)
+            .sheet(isPresented: $showSheet) {
+                NavigationView {
+                    ChatFiles()
+                        .navigationTitle("Received files")
+                        .toolbar {
+                            Button("Done") {
+                                showSheet = false
+                            }
+                        }
+                }
+                .presentationDetents([.medium, .large])
+            }
         }
+    }
+    
+    var menuButton: some View {
+        Menu {
+            Button("Select", systemImage: "checkmark.circle") {
+                withAnimation {
+                    editMode = .active
+                }
+            }
+            Button("Received files", systemImage: "folder") {
+                showSheet = true
+            }
+        } label: {
+            Image(systemName: "ellipsis.circle")
+        }
+        .imageScale(.large)
     }
 }
 
