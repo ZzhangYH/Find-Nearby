@@ -21,6 +21,7 @@ struct DiscoverStatus: View {
                 DiscoverStatusSection(data: mc.connectedPeers, isConnected: true)
                 DiscoverStatusSection(data: mc.notConnectedPeers, isConnected: false)
             }
+            .environmentObject(mc)
             .scrollContentBackground(.hidden)
             .background(Color(UIColor.systemBackground))
         }
@@ -28,6 +29,8 @@ struct DiscoverStatus: View {
 }
 
 struct DiscoverStatusSection: View {
+    @EnvironmentObject var mc: MCManager
+    
     var data: [MCPeerID]
     var isConnected: Bool
     
@@ -44,6 +47,14 @@ struct DiscoverStatusSection: View {
                     Text(peerID.displayName)
                     
                     Spacer()
+                    
+                    if !isConnected {
+                        Button("Reconnect", systemImage: "bolt.horizontal.circle.fill") {
+                            mc.serviceBrowser.invitePeer(peerID, to: mc.session, withContext: nil, timeout: 60)
+                        }
+                        .foregroundColor(.secondary)
+                        .labelStyle(.iconOnly)
+                    }
                 }
             }
             .listRowBackground(Color(UIColor.quaternarySystemFill))
