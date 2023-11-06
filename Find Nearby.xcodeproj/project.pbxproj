@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B301BF5A2AF8FCF800EC6876 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B301BF592AF8FCF800EC6876 /* README.md */; };
+		B301BF5C2AF8FD1500EC6876 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B301BF5B2AF8FD1500EC6876 /* LICENSE */; };
 		B31B30CE2AB48E87007B3239 /* ChatProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31B30CD2AB48E87007B3239 /* ChatProfile.swift */; };
 		B33B14B22A7A4749001AF21C /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33B14B12A7A4749001AF21C /* DiscoverView.swift */; };
 		B34266AF2A80C4E000A8A0A5 /* MCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34266AE2A80C4E000A8A0A5 /* MCManager.swift */; };
@@ -27,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B301BF592AF8FCF800EC6876 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		B301BF5B2AF8FD1500EC6876 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		B31B30CD2AB48E87007B3239 /* ChatProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatProfile.swift; sourceTree = "<group>"; };
 		B33B14B12A7A4749001AF21C /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
 		B34266AE2A80C4E000A8A0A5 /* MCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCManager.swift; sourceTree = "<group>"; };
@@ -94,6 +98,8 @@
 		B39C70262A78E01600F4FCF7 = {
 			isa = PBXGroup;
 			children = (
+				B301BF5B2AF8FD1500EC6876 /* LICENSE */,
+				B301BF592AF8FCF800EC6876 /* README.md */,
 				B39C70312A78E01600F4FCF7 /* Find Nearby */,
 				B39C70302A78E01600F4FCF7 /* Products */,
 			);
@@ -188,7 +194,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B301BF5A2AF8FCF800EC6876 /* README.md in Resources */,
 				B39C703A2A78E01700F4FCF7 /* Preview Assets.xcassets in Resources */,
+				B301BF5C2AF8FD1500EC6876 /* LICENSE in Resources */,
 				B39C70372A78E01700F4FCF7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,13 +358,15 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Find-Nearby-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Find Nearby";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save chat images to your library";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Select images from your library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -383,13 +393,15 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Find-Nearby-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Find Nearby";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save chat images to your library";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Select images from your library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
